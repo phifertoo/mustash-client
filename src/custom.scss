@@ -1,0 +1,74 @@
+$body-bg: white;
+
+:root {
+  --primary-color: #17a2b8;
+  --dark-color: #343a40;
+  --light-color: #f4f4f4;
+  --danger-color: #dc3545;
+  --success-color: #28a745;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+// _________________________________________________Navbar_________________________________________________________________________
+
+.navbar {
+  // since bootstrap uses justify-content: space-between, you have to override it with !important
+  justify-content: center !important;
+  background-color: var(--dark-color);
+  z-index: 999;
+  width: 100%;
+}
+
+.navbar ul {
+  display: flex;
+  list-style-type: none;
+}
+
+.navbar a {
+  color: white;
+  font-weight: 700;
+}
+
+.navbar > .logo {
+  display: none;
+}
+
+.sign-up {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+}
+
+.sign-up .form-control {
+  width: 400px;
+}
+
+// _________________________________________________Register_________________________________________________________________________
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (min-width: 576px) {
+  .navbar {
+    // since bootstrap uses justify-content: space-between, you have to override it with !important
+    justify-content: space-between !important;
+  }
+  .navbar > .logo {
+    display: block;
+    height: auto;
+    width: 50px;
+  }
+}
+
+@import "~bootstrap/scss/bootstrap.scss";
