@@ -8,6 +8,7 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "animate.css": "^4.1.0",
+    "aos": "^2.3.4",
     "axios": "^0.19.2",
     "bootstrap": "^4.5.0",
     "jquery": "^3.5.1",
@@ -15,10 +16,13 @@
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.1",
     "react-dom": "^16.13.1",
+    "react-google-maps": "^9.4.5",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
+    "redux-devtools-extension": "^2.13.8",
     "redux-starter-kit": "^2.0.0",
+    "redux-thunk": "^2.3.0",
     "uuid": "^8.0.0"
   },
   "scripts": {

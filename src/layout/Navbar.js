@@ -6,20 +6,22 @@ import logo from "../assets/mustashlogo.png";
 export const Navbar = () => {
   return (
     <nav className="navbar">
-      <img className="logo " src={logo} alt="" />
+      <Link to="/" className="logo-container">
+        <img className="logo " src={logo} alt="" />
+      </Link>
       <ul className="nav-list text-center">
         <li className="nav-item active">
-          <a className="nav-link" href="#">
-            Sign In
-          </a>
+          <Link to="/login" className="nav-link mt-2">
+            Login
+          </Link>
         </li>
         <li className="nav-item active">
-          <a className="nav-link" href="#">
+          <Link to="/register" className="nav-link mt-2">
             Sign Up
-          </a>
+          </Link>
         </li>
         <li className="nav-item active">
-          <a className="nav-link" href="#">
+          <a className="nav-link mt-2" href="#">
             About
           </a>
         </li>

@@ -1,11 +1,18 @@
-import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
-import playerInfoReducer from "./playerInfo/playerInfoSlice";
+import { createStore, applyMiddleware } from "redux";
+import rootReducer from "./reducers";
+import { composeWithDevTools } from "redux-devtools-extension";
+import thunk from "redux-thunk";
 
-export default configureStore({
-  reducer: {
-    playerInfo: playerInfoReducer,
-  },
-  middleware: getDefaultMiddleware({
-    serializableCheck: false,
-  }),
-});
+const initialState = {};
+
+//need to install for async
+const middleware = [thunk];
+
+const store = createStore(
+  rootReducer,
+  initialState,
+  //need to install for async
+  composeWithDevTools(applyMiddleware(...middleware))
+);
+
+export default store;

@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import store from "./store";
 import Login from "./auth/Login.js";
 import Register from "./auth/Register.js";
+import Landing from "./layout/Landing.js";
+import ListSpace from "./layout/ListSpace";
 
 function App() {
   return (
@@ -11,8 +13,10 @@ function App() {
       <Router>
         <Fragment>
           <Switch>
-            <Route exact path="/" component={Login} />
+            <Route exact path="/" component={Landing} />
+            <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
+            <Route exact path="/listspace" component={ListSpace} />
           </Switch>
         </Fragment>
       </Router>

@@ -21,7 +21,7 @@ $body-bg: white;
   justify-content: center !important;
   background-color: var(--dark-color);
   z-index: 999;
-  width: 100%;
+  width: 100vw;
 }
 
 .navbar ul {
@@ -34,11 +34,12 @@ $body-bg: white;
   font-weight: 700;
 }
 
-.navbar > .logo {
+.logo-container > .logo {
   display: none;
 }
 
-.sign-up {
+.sign-up,
+.list-space {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -59,15 +60,80 @@ $body-bg: white;
   align-items: center;
 }
 
-@media (min-width: 576px) {
+// _________________________________________________Landing_________________________________________________________________________
+
+.search-form-container {
+  width: 100vw;
+  height: 15%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-form {
+  width: 50%;
+  height: 50px;
+  border-radius: 5px;
+  font-size: 30px;
+  font-weight: normal;
+}
+
+.select-state {
+  height: 50px;
+  width: 80px;
+  border-radius: 5px;
+  font-size: 30px;
+  font-weight: normal;
+}
+
+.search-button {
+  height: 50px;
+  width: 80px;
+}
+
+.background-image {
+  background-image: url("./assets/home3.jpg");
+  width: 100vw;
+  height: 60vh;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.7;
+  display: flex;
+  align-items: center;
+}
+
+// _________________________________________________Media Queries_________________________________________________________________________
+
+@media only screen and (min-width: 576px) {
   .navbar {
     // since bootstrap uses justify-content: space-between, you have to override it with !important
     justify-content: space-between !important;
   }
-  .navbar > .logo {
+  .logo-container > .logo {
     display: block;
-    height: auto;
-    width: 50px;
+    height: 65px;
+    width: 65px;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  .background-image {
+    height: 70vh;
+  }
+  .search-form {
+    height: 80px;
+  }
+  .search-button {
+    height: 80px;
+  }
+  .select-state {
+    height: 80px;
+  }
+}
+
+@media only screen and (min-width: 1300px) {
+  .background-image {
+    height: 80vh;
   }
 }
 
