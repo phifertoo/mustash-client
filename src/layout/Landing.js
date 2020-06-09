@@ -1,116 +1,82 @@
 import React, { useState, Fragment, useEffect } from "react";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import Navbar from "./Navbar";
 import piggy from "../assets/piggy-bank.jpg";
 import clutter from "../assets/clutter.jpg";
-import { geocode } from "../actions/geo";
 import PropTypes from "prop-types";
-import Map from "./Map";
 /* 1.npm install aos 2. import AOS from 'aos' 3. import 'aos/dist/aos.css' 4. AOS.init() in useEffect*/
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { searchListings, saveSearchQuery } from "../actions/searchListings";
 
-export const Landing = ({ geocode }) => {
-  const [formData, setFormData] = useState({
-    city: "",
-    state: "",
+export const Landing = ({ searchListings, saveSearchQuery }) => {
+  const [data, setData] = useState({
+    address: "",
+    radius: 0,
     redirect: false,
   });
-  const { city, state, redirect } = formData;
-  const onChange = (e) =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  const onSubmit = async (e) => {
+  const { address, radius, redirect } = data;
+  const handleChange = (e) =>
+    setData({ ...data, [e.target.name]: e.target.value });
+  const handleSubmit = (e) => {
     e.preventDefault();
-    geocode({ city, state });
-    setFormData({ ...formData, redirect: true });
+    saveSearchQuery(data);
+    // searchListings();
+    // geocode({ city, state });
+    setData({
+      ...data,
+      redirect: true,
+    });
   };
 
   useEffect(() => {
     AOS.init();
-    if (redirect) {
-      return <Redirect to="/map" />;
-    }
-  }, [redirect]);
+
+    // if (redirect) {
+    //   return <Redirect to="/searchlistings" />;
+    // }
+  }, []);
   return (
     <Fragment>
       <Navbar />
+      {redirect ? <Redirect to="/searchresults" /> : null}
       <div className="test">
         <div className="background-image">
           <form
             className="search-form-container"
             onSubmit={(e) => {
-              onSubmit(e);
+              handleSubmit(e);
             }}
           >
             <input
               className="search-form mr-3"
               type="text"
-              placeholder="Enter a City"
-              value={city}
-              name="city"
-              onChange={(e) => onChange(e)}
+              placeholder="Enter an address"
+              value={address}
+              name="address"
+              onChange={(e) => handleChange(e)}
             />
             <select
               className="mr-3 select-state"
-              value={state}
-              name="state"
-              onChange={(e) => onChange(e)}
+              value={radius}
+              name="radius"
+              onChange={(e) => handleChange(e)}
             >
-              <option>AL</option>
-              <option>AK</option>
-              <option>AZ</option>
-              <option>AR</option>
-              <option>CA</option>
-              <option>CO</option>
-              <option>CT</option>
-              <option>FL</option>
-              <option>GA</option>
-              <option>HI</option>
-              <option>ID</option>
-              <option>IL</option>
-              <option>IN</option>
-              <option>IA</option>
-              <option>KS</option>
-              <option>KY</option>
-              <option>LA</option>
-              <option>ME</option>
-              <option>MD</option>
-              <option>MA</option>
-              <option>MI</option>
-              <option>MN</option>
-              <option>MS</option>
-              <option>MO</option>
-              <option>MT</option>
-              <option>NE</option>
-              <option>NV</option>
-              <option>NH</option>
-              <option>NM</option>
-              <option>NY</option>
-              <option>NC</option>
-              <option>ND</option>
-              <option>OH</option>
-              <option>OK</option>
-              <option>OR</option>
-              <option>PA</option>
-              <option>RI</option>
-              <option>SC</option>
-              <option>SD</option>
-              <option>TN</option>
-              <option>TX</option>
-              <option>UT</option>
-              <option>VT</option>
-              <option>VA</option>
-              <option>WA</option>
-              <option>WV</option>
-              <option>WI</option>
-              <option>WY</option>
+              <option>Radius</option>
+              <option>1</option>
+              <option>2</option>
+              <option>5</option>
+              <option>10</option>
+              <option>25</option>
             </select>
-            <input
+            <button
               type="submit"
               className="btn btn-danger search-button"
               value="Search"
-            />
+            >
+              Search
+            </button>
           </form>
         </div>
         {/* You can center all the elements inside the parent using text-center */}
@@ -143,7 +109,9 @@ export const Landing = ({ geocode }) => {
               nemo hic quisquam velit nostrum, vel ipsam minima minus,
               dignissimos, quibusdam architecto?
             </p>
-            <button className="btn btn-danger mb-3">Learn More</button>
+            <Link to="/getStarted">
+              <button className="btn btn-danger mb-3">Learn More</button>
+            </Link>
           </div>
           <img
             src={piggy}
@@ -153,14 +121,16 @@ export const Landing = ({ geocode }) => {
           />
         </section>
       </div>
-      <Map />
     </Fragment>
   );
 };
 Landing.propTypes = {
-  geocode: PropTypes.func.isRequired,
+  searchListings: PropTypes.func.isRequired,
+  saveSearchQuery: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({});
 
-export default connect(mapStateToProps, { geocode })(Landing);
+export default connect(mapStateToProps, { searchListings, saveSearchQuery })(
+  Landing
+);

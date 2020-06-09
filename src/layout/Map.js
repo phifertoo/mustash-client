@@ -4,8 +4,6 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
 export const Map = ({ lat, long }) => {
-  console.log(lat, long);
-
   const GoogleMapExample = withGoogleMap(({ lat, long }) => {
     let array = [
       { lat: 40.756795, lng: -75 },
@@ -14,7 +12,6 @@ export const Map = ({ lat, long }) => {
 
     return (
       <GoogleMap defaultCenter={{ lat: 40.756795, lng: -75 }} defaultZoom={13}>
-        {" "}
         {/* <Marker
           onClick={() => alert("bottom")}
           position={{ lat: 40.756795, lng: -52 }}

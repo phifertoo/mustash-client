@@ -10,6 +10,7 @@ export const Landing = ({ login }) => {
     email: "",
     password: "",
   });
+
   const { email, password } = formData;
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -48,7 +49,7 @@ export const Landing = ({ login }) => {
             <input type="submit" className="btn btn-primary" value="Log In" />
           </form>
           <p className="my-3">
-            Don't have an account? <Link to="/Register">Register</Link>
+            Don&apos;t have an account? <Link to="/Register">Register</Link>
           </p>
         </div>
       </section>

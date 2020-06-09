@@ -5,7 +5,8 @@ import store from "./store";
 import Login from "./auth/Login.js";
 import Register from "./auth/Register.js";
 import Landing from "./layout/Landing.js";
-import ListSpace from "./layout/ListSpace";
+import ListSpace from "./list/ListSpace";
+import SearchResults from "./rent/SearchResults";
 
 function App() {
   return (
@@ -16,7 +17,8 @@ function App() {
             <Route exact path="/" component={Landing} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
-            <Route exact path="/listspace" component={ListSpace} />
+            <Route exact path="/getstarted" component={ListSpace} />
+            <Route exact path="/searchresults" component={SearchResults} />
           </Switch>
         </Fragment>
       </Router>
