@@ -47,7 +47,7 @@ export const SearchResults = ({
           <div
             style={{
               height: 350,
-              width: "100vw",
+              width: "100%",
               display: "flex",
               flexFlow: "row nowrap",
               justifyContent: "center",

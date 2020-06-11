@@ -101,7 +101,7 @@ export const submitSpace = (data) => async (dispatch) => {
     headers: {
       "Content-Type": "multipart/form-data",
       "x-auth-token":
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXIiOiI1ZWJlNGE1ZjQ0YjBlYzJjZTg0Mjk0YzIifSwiaWF0IjoxNTkxNTU5NzA1LCJleHAiOjE1OTE2NTk3MDV9.Gez1w3ZPyXk8CMok99lkx0wKxMnVlN4F6znvw6oRtgg  ",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXIiOiI1ZWJlNGE1ZjQ0YjBlYzJjZTg0Mjk0YzIifSwiaWF0IjoxNTkxODA3NjI0LCJleHAiOjE1OTE5MDc2MjR9.mlFjh3Wr3WTcUV6LYmMan1JqsYh9KQlrq2yxDK6fjko",
     },
   };
 
@@ -126,26 +126,9 @@ export const submitSpace = (data) => async (dispatch) => {
         );
     })
   );
-
-  Object.keys(data.size).map((element) =>
-    body.append(element, data.size[element])
-  );
-
-  // let reader = new FileReader();
-  // reader.readAsDataURL(blob); // converts the blob to base64 and calls onload
-  // reader.onload = function () {
-  //   data[element] = JSON.stringify(reader.result);
-  // };
-  //   }
-  // });
-
-  // Object.keys(images).map((element, index) => {
-  //   const reader = new FileReader();
-  //   reader.readAsDataURL(images[element]);
-  //   reader.onloadend = () => {
-  //     data.images[element] = reader.result;
-  //   };
-  // });
+  Object.keys(data.size).map((
+    element //since the sizes are nested, we have to un-nest the size data
+  ) => body.append(element, data.size[element]));
 
   try {
     const res = await axios.post("/api/listing", body, config);

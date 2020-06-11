@@ -1,5 +1,5 @@
 const initialState = {
-  currentStep: 0,
+  currentStep: 9,
   address: {
     street: "555 s flower",
     city: "los angeles",

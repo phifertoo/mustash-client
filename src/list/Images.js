@@ -19,22 +19,30 @@ export const Images = ({ currentStep, setImages, nextStep, previousStep }) => {
   };
 
   const handleChange = async (e) => {
-    //create an image url so you don't have to store the image in the state/redux
-    const imageURL = window.URL.createObjectURL(e.target.files[0]);
-    // let testblob = await fetch(imageURL).then((r) => r.blob());
-    // console.log(testblob);
-
-    setData({
-      ...data,
-      [e.target.name]: imageURL,
-    });
+    if (e.target.files[0].size <= 3000000) {
+      //create an image url so you don't have to store the image in the state/redux
+      const imageURL = window.URL.createObjectURL(e.target.files[0]);
+      // let testblob = await fetch(imageURL).then((r) => r.blob());
+      // console.log(testblob);
+      setData({
+        ...data,
+        [e.target.name]: imageURL,
+      });
+    } else {
+      //if the pictures are greater than 1MB, the input value needs to be set to an empty string.
+      e.target.value = "";
+      alert("Pictures must be less than 3MB");
+    }
   };
 
   return (
     <div>
       {stepMap[currentStep] === "image" && (
         <Fragment>
-          <h4 className="image-title mt-4">Upload pictures of your space</h4>
+          <h4 className="image-title mt-4">
+            Upload up to 5 pictures of your space. Pictures must be less than
+            1MB.
+          </h4>
           <div className="image-container">
             <div className="form-group image-inner-container">
               <input
@@ -42,7 +50,6 @@ export const Images = ({ currentStep, setImages, nextStep, previousStep }) => {
                 name="image1"
                 type="file"
                 accept="image/*"
-                placeholder="Upload picture"
                 onChange={(e) => handleChange(e)}
               />
               <input
@@ -50,7 +57,6 @@ export const Images = ({ currentStep, setImages, nextStep, previousStep }) => {
                 name="image2"
                 type="file"
                 accept="image/*"
-                placeholder="Upload picture"
                 onChange={(e) => handleChange(e)}
               />
               <input
@@ -58,7 +64,6 @@ export const Images = ({ currentStep, setImages, nextStep, previousStep }) => {
                 name="image3"
                 type="file"
                 accept="image/*"
-                placeholder="Upload picture"
                 onChange={(e) => handleChange(e)}
               />
               <input
@@ -66,7 +71,6 @@ export const Images = ({ currentStep, setImages, nextStep, previousStep }) => {
                 name="image4"
                 type="file"
                 accept="image/*"
-                placeholder="Upload picture"
                 onChange={(e) => handleChange(e)}
               />
               <input
@@ -74,7 +78,6 @@ export const Images = ({ currentStep, setImages, nextStep, previousStep }) => {
                 name="image5"
                 type="file"
                 accept="image/*"
-                placeholder="Upload picture"
                 onChange={(e) => handleChange(e)}
               />
             </div>

@@ -15,7 +15,6 @@ export default function (state = initialState, action) {
         searchRadius: Number(payload.radius),
       };
     case "SEARCHLISTINGS_SUCCESS":
-      console.log(payload);
       return {
         ...state,
         searchResults: payload.locations,
