@@ -1,8 +1,8 @@
-import React, { Fragment, useState, useEffect } from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import { previousStep, setStep, submitSpace } from "../actions/list";
-import { stepMap } from "./stepMap";
+import React, { Fragment, useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { previousStep, setStep, submitSpace } from '../actions/list';
+import { stepMap } from './stepMap';
 
 export const Summary = ({
   currentStep,
@@ -50,30 +50,30 @@ export const Summary = ({
   };
 
   const typeString =
-    type === "rv" ? "RV" : `${type.charAt(0).toUpperCase()}${type.slice(1)}`;
+    type === 'rv' ? 'RV' : `${type.charAt(0).toUpperCase()}${type.slice(1)}`;
   const accessString = `${access.charAt(0).toUpperCase()}${access.slice(1)}`;
   const frequencyString =
-    frequency === "24/7"
-      ? "24/7"
+    frequency === '24/7'
+      ? '24/7'
       : `${frequency.charAt(0).toUpperCase()}${frequency.slice(1)}`;
   const addressString = `${address.street}, ${address.city}, ${address.state}, ${address.zip}`;
 
   const showSuccess = () => {
     if (success) {
-      return <h3 className="text-success">Your space has been listed</h3>;
+      return <h3 className='text-success'>Your space has been listed</h3>;
     } else if (error) {
-      return <h3 className="text-danger">Error in listing your space</h3>;
+      return <h3 className='text-danger'>Error in listing your space</h3>;
     }
   };
 
   useEffect(() => {});
 
   return (
-    <div>
-      {stepMap[currentStep] === "summary" && (
-        <Fragment>
+    <Fragment>
+      {stepMap[currentStep] === 'summary' && (
+        <div className='summary-component-container'>
           {showSuccess()}
-          <table className="table table-bordered ">
+          <table className='table table-bordered '>
             <thead>
               <tr>
                 <th>Category</th>
@@ -87,7 +87,7 @@ export const Summary = ({
                 <td>{typeString}</td>
                 <td>
                   <button
-                    className="btn btn-sm btn-primary"
+                    className='btn btn-sm btn-primary'
                     onClick={() => handleEdit(0)}
                   >
                     Edit
@@ -99,7 +99,7 @@ export const Summary = ({
                 <td>{`${size.length} ft (length) x ${size.width} ft (width) x ${size.height} ft (height)`}</td>
                 <td>
                   <button
-                    className="btn btn-sm btn-primary"
+                    className='btn btn-sm btn-primary'
                     onClick={() => handleEdit(1)}
                   >
                     Edit
@@ -111,7 +111,7 @@ export const Summary = ({
                 <td>{addressString}</td>
                 <td>
                   <button
-                    className="btn btn-sm btn-primary"
+                    className='btn btn-sm btn-primary'
                     onClick={() => handleEdit(2)}
                   >
                     Edit
@@ -120,10 +120,10 @@ export const Summary = ({
               </tr>
               <tr>
                 <td>Content</td>
-                <td>{content.join(", ")}</td>
+                <td>{content.join(', ')}</td>
                 <td>
                   <button
-                    className="btn btn-sm btn-primary"
+                    className='btn btn-sm btn-primary'
                     onClick={() => handleEdit(3)}
                   >
                     Edit
@@ -135,7 +135,7 @@ export const Summary = ({
                 <td>{frequencyString}</td>
                 <td>
                   <button
-                    className="btn btn-sm btn-primary"
+                    className='btn btn-sm btn-primary'
                     onClick={() => handleEdit(4)}
                   >
                     Edit
@@ -147,7 +147,7 @@ export const Summary = ({
                 <td>{accessString}</td>
                 <td>
                   <button
-                    className="btn btn-sm btn-primary"
+                    className='btn btn-sm btn-primary'
                     onClick={() => handleEdit(5)}
                   >
                     Edit
@@ -159,7 +159,7 @@ export const Summary = ({
                 <td>{title}</td>
                 <td>
                   <button
-                    className="btn btn-sm btn-primary"
+                    className='btn btn-sm btn-primary'
                     onClick={() => handleEdit(6)}
                   >
                     Edit
@@ -171,7 +171,7 @@ export const Summary = ({
                 <td>{description}</td>
                 <td>
                   <button
-                    className="btn btn-sm btn-primary"
+                    className='btn btn-sm btn-primary'
                     onClick={() => handleEdit(6)}
                   >
                     Edit
@@ -183,7 +183,7 @@ export const Summary = ({
                 <td>{`$ ${price}`}</td>
                 <td>
                   <button
-                    className="btn btn-sm btn-primary"
+                    className='btn btn-sm btn-primary'
                     onClick={() => handleEdit(7)}
                   >
                     Edit
@@ -193,20 +193,20 @@ export const Summary = ({
             </tbody>
           </table>
           <hr />
-          <div className="button-container">
+          <div className='button-container'>
             <button
-              className="btn btn-primary"
+              className='btn btn-primary'
               onClick={() => previousStep(currentStep)}
             >
               Previous
             </button>
-            <button className="btn btn-primary" onClick={() => handleClick()}>
+            <button className='btn btn-primary' onClick={() => handleClick()}>
               List it!
             </button>
           </div>
-        </Fragment>
+        </div>
       )}
-    </div>
+    </Fragment>
   );
 };
 

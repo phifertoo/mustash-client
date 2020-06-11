@@ -1,8 +1,8 @@
-import React, { Fragment, useState } from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import { nextStep, previousStep, setTitleDescription } from "../actions/list";
-import { stepMap } from "./stepMap";
+import React, { Fragment, useState } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { nextStep, previousStep, setTitleDescription } from '../actions/list';
+import { stepMap } from './stepMap';
 
 export const TitleDescription = ({
   currentStep,
@@ -11,8 +11,8 @@ export const TitleDescription = ({
   previousStep,
 }) => {
   const [data, setData] = useState({
-    title: "",
-    description: "",
+    title: '',
+    description: '',
   });
   const { title, description } = data;
 
@@ -28,55 +28,55 @@ export const TitleDescription = ({
     });
   };
 
-  const completed = Object.keys(data).every((element) => data[element] !== "");
+  const completed = Object.keys(data).every((element) => data[element] !== '');
 
   return (
-    <div>
-      {stepMap[currentStep] === "titleDescription" && (
-        <Fragment>
-          <h4 className="titleDescription-title mt-4">
+    <Fragment>
+      {stepMap[currentStep] === 'titleDescription' && (
+        <div className='titleDescription-component-container'>
+          <h4 className='titleDescription-title mt-4'>
             Provide a title and description of your space
           </h4>
-          <div className="titleDescription-container">
-            <div className="form-group titleDescription-inner-container">
+          <div className='titleDescription-container'>
+            <div className='form-group titleDescription-inner-container'>
               <input
-                className="form-control"
-                name="title"
-                type="text"
-                placeholder="Title"
+                className='form-control'
+                name='title'
+                type='text'
+                placeholder='Title'
                 value={title}
                 onChange={(e) => handleChange(e)}
               />
               <textarea
-                className="form-control description-box mt-4"
-                name="description"
-                type="text"
-                placeholder="Description"
+                className='form-control description-box mt-4'
+                name='description'
+                type='text'
+                placeholder='Description'
                 value={description}
                 onChange={(e) => handleChange(e)}
               />
             </div>
           </div>
           <hr />
-          <div className="button-container">
+          <div className='button-container'>
             <button
-              className="btn btn-primary"
+              className='btn btn-primary'
               onClick={() => previousStep(currentStep)}
             >
               Previous
             </button>
             {completed && (
               <button
-                className="btn btn-primary"
+                className='btn btn-primary'
                 onClick={() => increaseStep(data, currentStep)}
               >
                 Next
               </button>
             )}
           </div>
-        </Fragment>
+        </div>
       )}
-    </div>
+    </Fragment>
   );
 };
 

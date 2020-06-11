@@ -1,8 +1,8 @@
-import React, { Fragment, useState } from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import { nextStep, previousStep, setAddress } from "../actions/list";
-import { stepMap } from "./stepMap";
+import React, { Fragment, useState } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { nextStep, previousStep, setAddress } from '../actions/list';
+import { stepMap } from './stepMap';
 
 export const Address = ({
   currentStep,
@@ -11,10 +11,10 @@ export const Address = ({
   previousStep,
 }) => {
   const [data, setData] = useState({
-    street: "",
-    city: "",
-    zip: "",
-    state: "",
+    street: '',
+    city: '',
+    zip: '',
+    state: '',
   });
   const { street, city, zip } = data;
 
@@ -25,7 +25,7 @@ export const Address = ({
 
   const handleChange = (e) => {
     const pattern = /^([0-9]{0,5})$/;
-    if (e.target.name !== "zip" || pattern.test(e.target.value)) {
+    if (e.target.name !== 'zip' || pattern.test(e.target.value)) {
       setData({
         ...data,
         [e.target.name]: e.target.value,
@@ -34,43 +34,43 @@ export const Address = ({
   };
 
   const completed = Object.keys(data).every((element) => {
-    if (element === "zip") {
+    if (element === 'zip') {
       return data.zip.length === 5;
     } else {
-      return data[element] !== "";
+      return data[element] !== '';
     }
   });
 
   return (
-    <div>
-      {stepMap[currentStep] === "address" && (
-        <Fragment>
-          <h4 className="address-title mt-4">
+    <Fragment>
+      {stepMap[currentStep] === 'address' && (
+        <div className='address-component-container'>
+          <h4 className='address-title mt-4'>
             Provide the address for your space
           </h4>
-          <div className="address-container">
-            <div className="form-group address-inner-container">
+          <div className='address-container'>
+            <div className='form-group address-inner-container'>
               <input
-                className="form-control address-input mt-3"
-                name="street"
-                type="text"
-                placeholder="Street"
+                className='form-control address-input mt-3'
+                name='street'
+                type='text'
+                placeholder='Street'
                 value={street}
                 onChange={(e) => handleChange(e)}
               />
-              <div className="city-state-container mt-3">
+              <div className='city-state-container mt-3'>
                 <input
-                  className="form-control address-input"
-                  id="address-city"
-                  name="city"
-                  type="text"
-                  placeholder="City"
+                  className='form-control address-input'
+                  id='address-city'
+                  name='city'
+                  type='text'
+                  placeholder='City'
                   value={city}
                   onChange={(e) => handleChange(e)}
                 />
                 <select
-                  className="address-state"
-                  name="state"
+                  className='address-state'
+                  name='state'
                   onChange={(e) => handleChange(e)}
                 >
                   <option></option>
@@ -125,35 +125,35 @@ export const Address = ({
                 </select>
               </div>
               <input
-                className="form-control address-input mt-3"
-                name="zip"
-                type="text"
-                placeholder="Zip"
+                className='form-control address-input mt-3'
+                name='zip'
+                type='text'
+                placeholder='Zip'
                 value={zip}
                 onChange={(e) => handleChange(e)}
               />
             </div>
           </div>
           <hr />
-          <div className="button-container">
+          <div className='button-container'>
             <button
-              className="btn btn-primary"
+              className='btn btn-primary'
               onClick={() => previousStep(currentStep)}
             >
               Previous
             </button>
             {completed && (
               <button
-                className="btn btn-primary"
+                className='btn btn-primary'
                 onClick={() => increaseStep(data, currentStep)}
               >
                 Next
               </button>
             )}
           </div>
-        </Fragment>
+        </div>
       )}
-    </div>
+    </Fragment>
   );
 };
 

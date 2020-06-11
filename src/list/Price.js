@@ -1,12 +1,12 @@
-import React, { Fragment, useState } from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import { nextStep, previousStep, setPrice } from "../actions/list";
-import { stepMap } from "./stepMap";
+import React, { Fragment, useState } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { nextStep, previousStep, setPrice } from '../actions/list';
+import { stepMap } from './stepMap';
 
 export const Price = ({ currentStep, setPrice, nextStep, previousStep }) => {
   const [data, setData] = useState({
-    price: "",
+    price: '',
   });
   const { price } = data;
 
@@ -17,7 +17,7 @@ export const Price = ({ currentStep, setPrice, nextStep, previousStep }) => {
 
   const handleChange = (e) => {
     const pattern = /^[1-9][0-9]{0,3}$/;
-    if (pattern.test(e.target.value) || e.target.value === "") {
+    if (pattern.test(e.target.value) || e.target.value === '') {
       setData({
         ...data,
         [e.target.name]: e.target.value,
@@ -25,49 +25,49 @@ export const Price = ({ currentStep, setPrice, nextStep, previousStep }) => {
     }
   };
 
-  const completed = Object.keys(data).every((element) => data[element] !== "");
+  const completed = Object.keys(data).every((element) => data[element] !== '');
 
   return (
-    <div>
-      {stepMap[currentStep] === "price" && (
-        <Fragment>
-          <div className="price-container">
-            <div className="price-title-container">
-              <h4 className="price-title mt-4">Name your price</h4>
+    <Fragment>
+      {stepMap[currentStep] === 'price' && (
+        <div className='price-component-container'>
+          <div className='price-container'>
+            <div className='price-title-container'>
+              <h4 className='price-title mt-4'>Name your price</h4>
             </div>
-            <div className="form-group price-inner-container">
-              <label className="price-input-container">
+            <div className='form-group price-inner-container'>
+              <label className='price-input-container'>
                 <input
-                  className="price-input"
-                  name="price"
-                  type="number"
+                  className='price-input'
+                  name='price'
+                  type='number'
                   value={price}
                   onChange={(e) => handleChange(e)}
                 />
               </label>
             </div>
-            <p className="suggestion-text">We recommend $2 psf</p>
+            <p className='suggestion-text'>We recommend $2 psf</p>
           </div>
           <hr />
-          <div className="button-container">
+          <div className='button-container'>
             <button
-              className="btn btn-primary"
+              className='btn btn-primary'
               onClick={() => previousStep(currentStep)}
             >
               Previous
             </button>
             {completed && (
               <button
-                className="btn btn-primary"
+                className='btn btn-primary'
                 onClick={() => increaseStep(data, currentStep)}
               >
                 Next
               </button>
             )}
           </div>
-        </Fragment>
+        </div>
       )}
-    </div>
+    </Fragment>
   );
 };
 

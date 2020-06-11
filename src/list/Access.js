@@ -1,14 +1,14 @@
-import React, { Fragment, useState } from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import { nextStep, previousStep, setAccess } from "../actions/list";
-import { stepMap } from "./stepMap";
+import React, { Fragment, useState } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { nextStep, previousStep, setAccess } from '../actions/list';
+import { stepMap } from './stepMap';
 
 export const Access = ({ currentStep, nextStep, previousStep, setAccess }) => {
   const [data, setData] = useState({
-    daytime: "",
-    evening: "",
-    "24/7": "",
+    daytime: '',
+    evening: '',
+    '24/7': '',
   });
 
   const [nextButton, setButton] = useState({
@@ -18,15 +18,15 @@ export const Access = ({ currentStep, nextStep, previousStep, setAccess }) => {
   const { isActive } = nextButton;
 
   const initialState = {
-    daytime: "",
-    evening: "",
-    "24/7": "",
+    daytime: '',
+    evening: '',
+    '24/7': '',
   };
 
   const handleClick = (e) => {
     setData({
       ...initialState,
-      [e.target.attributes.value.value]: "active",
+      [e.target.attributes.value.value]: 'active',
     });
     setButton({
       isActive: true,
@@ -36,20 +36,20 @@ export const Access = ({ currentStep, nextStep, previousStep, setAccess }) => {
   const increaseStep = (data, currentStep) => {
     nextStep(currentStep);
     const access = Object.keys(data).find(
-      (element) => data[element] === "active"
+      (element) => data[element] === 'active'
     );
     setAccess(access);
   };
 
   return (
-    <div>
-      {stepMap[currentStep] === "access" && (
-        <Fragment>
-          <h4 className="frequency-title">
+    <Fragment>
+      {stepMap[currentStep] === 'access' && (
+        <div className='hello'>
+          <h4 className='frequency-title'>
             How often will renters be able to access their belongings?
           </h4>
-          <div className="frequency-container-outer">
-            <div className="frequency-container-inner">
+          <div className='frequency-container-outer'>
+            <div className='frequency-container-inner'>
               {Object.keys(data).map((element, index) => (
                 <div
                   key={index}
@@ -59,13 +59,13 @@ export const Access = ({ currentStep, nextStep, previousStep, setAccess }) => {
                   }}
                   // activating the element if it is selected
                   className={`mx-1 ${
-                    data[element] === "active"
-                      ? "frequency-element-active mt-4"
-                      : "frequency-element mt-4"
+                    data[element] === 'active'
+                      ? 'frequency-element-active mt-4'
+                      : 'frequency-element mt-4'
                   }`}
                 >
                   <div
-                    className="frequency-text"
+                    className='frequency-text'
                     value={element}
                     onClick={(e) => {
                       handleClick(e);
@@ -78,25 +78,25 @@ export const Access = ({ currentStep, nextStep, previousStep, setAccess }) => {
             </div>
           </div>
           <hr />
-          <div className="button-container">
+          <div className='button-container'>
             <button
-              className="btn btn-primary"
+              className='btn btn-primary'
               onClick={() => previousStep(currentStep)}
             >
               Previous
             </button>
             {isActive && (
               <button
-                className="btn btn-primary"
+                className='btn btn-primary'
                 onClick={() => increaseStep(data, currentStep)}
               >
                 Next
               </button>
             )}
           </div>
-        </Fragment>
+        </div>
       )}
-    </div>
+    </Fragment>
   );
 };
 
