@@ -118,7 +118,9 @@ $body-bg: white;
 .frequency-component-container,
 .titleDescription-component-container,
 .price-component-container,
-.summary-component-container {
+.size-component-container,
+.summary-component-container,
+.image-component-container {
   width: 100%;
 }
 
@@ -464,7 +466,7 @@ $body-bg: white;
   padding-top: 20px;
 }
 
-.sidenav a {
+.sidenav-stage-completed {
   text-decoration: none;
   margin-top: 15px;
   font-size: 20px;
@@ -472,6 +474,18 @@ $body-bg: white;
   color: black;
   display: block;
   text-align: center;
+  border: 2px solid transparent;
+}
+
+.sidenav-stage-uncompleted {
+  @extend .sidenav-stage-completed;
+  color: #ccccb3;
+}
+
+.sidenav-stage-completed:hover {
+  cursor: pointer;
+  color: red;
+  border: 2px solid red;
 }
 
 // _________________________________________________Media Queries_________________________________________________________________________

@@ -11,14 +11,14 @@ import TitleDescription from './TitleDescription';
 import Price from './Price';
 import Images from './Images';
 import Summary from './Summary';
-import Progress from './Progress';
+import Sidebar from './Sidebar';
 
 export const ListSpace = () => {
   return (
     <div>
       <Navbar />
       <div className='list-container'>
-        <Progress />
+        <Sidebar />
         <Address />
         <Type />
         <Size />

@@ -44,7 +44,7 @@ export const Access = ({ currentStep, nextStep, previousStep, setAccess }) => {
   return (
     <Fragment>
       {stepMap[currentStep] === 'access' && (
-        <div className='hello'>
+        <div className='access-component-container'>
           <h4 className='frequency-title'>
             How often will renters be able to access their belongings?
           </h4>
