@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import { getImages } from "../actions/searchListings";
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { getImages } from '../actions/searchListings';
 
 const SearchItem = ({ searchItem, getImages }) => {
-  const [data, setData] = useState({
-    encodedImage: "",
-  });
+  // const [data, setData] = useState({
+  //   encodedImage: '',
+  // });
 
   // useEffect(() => {
   //   const asyncToBase64 = async (id) => {
@@ -31,24 +31,38 @@ const SearchItem = ({ searchItem, getImages }) => {
   //     }
   //   );
   // }, [data.encodedImage, searchItem._id, getImages]);
-
   return (
-    <div className="card mb-3">
-      <div className="row no-gutters">
-        <div className="col-md-3">
+    <div className='card mb-3'>
+      <div className='row no-gutters'>
+        <div className='col-md-2'>
           <img
             // src={`data:image/png;base64,${data.encodedImage}`}
             src={searchItem.s3Images.image1.url}
-            className="card-img-left"
-            alt="not working"
+            className='card-img-left'
+            alt='not working'
           ></img>
         </div>
-        <div className="col-md-8">
-          <div className="card-body">
-            <h5 className="card-title">
+        <div className='col-md-8'>
+          <div className='card-body'>
+            <h5 className='card-title'>
               {searchItem.title} : ${searchItem.price} per month
             </h5>
-            <p className="card-text">Description: {searchItem.description}</p>
+            <p className='card-text'>Address: {searchItem.addressString}</p>
+
+            <p className='card-text'>
+              Size:{' '}
+              {`${searchItem.size.length} ft (length) x ${searchItem.size.width} ft (width) x ${searchItem.size.height} ft (height)`}
+            </p>
+            <p className='card-text'>
+              Access: {searchItem.accessString} Frequency:{' '}
+              {searchItem.frequencyString}
+            </p>
+            <p className='card-text'>
+              Eligible Contents:{' '}
+              {searchItem.content.join('').replace(/,/g, ', ')}
+            </p>
+
+            <p className='card-text'>Description: {searchItem.description}</p>
           </div>
         </div>
       </div>
