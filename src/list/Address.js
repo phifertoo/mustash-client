@@ -1,14 +1,14 @@
 import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { nextStep, previousStep, setAddress } from '../ducks/list';
+import { nextStep, previousStep, setProperty } from '../ducks/list';
 import { stepMap } from './stepMap';
 
 export const Address = ({
   currentStep,
-  setAddress,
   nextStep,
   previousStep,
+  setProperty,
 }) => {
   const [data, setData] = useState({
     street: '',
@@ -19,7 +19,7 @@ export const Address = ({
   const { street, city, zip } = data;
 
   const increaseStep = (data, currentStep) => {
-    setAddress(data);
+    setProperty('address', data);
     nextStep(currentStep);
   };
 
@@ -161,13 +161,15 @@ Address.propTypes = {
   currentStep: PropTypes.number.isRequired,
   nextStep: PropTypes.func.isRequired,
   previousStep: PropTypes.func.isRequired,
-  setAddress: PropTypes.func.isRequired,
+  setProperty: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   currentStep: state.space.currentStep,
 });
 
-export default connect(mapStateToProps, { nextStep, previousStep, setAddress })(
-  Address
-);
+export default connect(mapStateToProps, {
+  nextStep,
+  previousStep,
+  setProperty,
+})(Address);

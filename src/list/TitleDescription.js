@@ -1,14 +1,14 @@
 import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { nextStep, previousStep, setTitleDescription } from '../ducks/list';
+import { nextStep, previousStep, setProperty } from '../ducks/list';
 import { stepMap } from './stepMap';
 
 export const TitleDescription = ({
   currentStep,
-  setTitleDescription,
   nextStep,
   previousStep,
+  setProperty,
 }) => {
   const [data, setData] = useState({
     title: '',
@@ -17,7 +17,7 @@ export const TitleDescription = ({
   const { title, description } = data;
 
   const increaseStep = (data, currentStep) => {
-    setTitleDescription(data);
+    setProperty('titledescription', data);
     nextStep(currentStep);
   };
 
@@ -84,7 +84,7 @@ TitleDescription.propTypes = {
   currentStep: PropTypes.number.isRequired,
   nextStep: PropTypes.func.isRequired,
   previousStep: PropTypes.func.isRequired,
-  setTitleDescription: PropTypes.func.isRequired,
+  setProperty: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -94,5 +94,5 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   nextStep,
   previousStep,
-  setTitleDescription,
+  setProperty,
 })(TitleDescription);

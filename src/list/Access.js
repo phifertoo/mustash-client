@@ -1,10 +1,15 @@
 import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { nextStep, previousStep, setAccess } from '../ducks/list';
+import { nextStep, previousStep, setProperty } from '../ducks/list';
 import { stepMap } from './stepMap';
 
-export const Access = ({ currentStep, nextStep, previousStep, setAccess }) => {
+export const Access = ({
+  currentStep,
+  nextStep,
+  previousStep,
+  setProperty,
+}) => {
   const [data, setData] = useState({
     daytime: '',
     evening: '',
@@ -38,7 +43,7 @@ export const Access = ({ currentStep, nextStep, previousStep, setAccess }) => {
     const access = Object.keys(data).find(
       (element) => data[element] === 'active'
     );
-    setAccess(access);
+    setProperty('access', access);
   };
 
   return (
@@ -104,7 +109,7 @@ Access.propTypes = {
   currentStep: PropTypes.number.isRequired,
   nextStep: PropTypes.func.isRequired,
   previousStep: PropTypes.func.isRequired,
-  setAccess: PropTypes.func.isRequired,
+  setProperty: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -114,5 +119,5 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   nextStep,
   previousStep,
-  setAccess,
+  setProperty,
 })(Access);

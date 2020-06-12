@@ -1,14 +1,14 @@
 import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { nextStep, previousStep, setFrequency } from '../ducks/list';
+import { nextStep, previousStep, setProperty } from '../ducks/list';
 import { stepMap } from './stepMap';
 
 export const Frequency = ({
   currentStep,
   nextStep,
   previousStep,
-  setFrequency,
+  setProperty,
 }) => {
   const [data, setData] = useState({
     monthly: '',
@@ -43,7 +43,7 @@ export const Frequency = ({
     const frequency = Object.keys(data).find(
       (element) => data[element] === 'active'
     );
-    setFrequency(frequency);
+    setProperty('frequency', frequency);
   };
 
   return (
@@ -109,7 +109,7 @@ Frequency.propTypes = {
   currentStep: PropTypes.number.isRequired,
   nextStep: PropTypes.func.isRequired,
   previousStep: PropTypes.func.isRequired,
-  setFrequency: PropTypes.func.isRequired,
+  setProperty: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -119,5 +119,5 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   nextStep,
   previousStep,
-  setFrequency,
+  setProperty,
 })(Frequency);

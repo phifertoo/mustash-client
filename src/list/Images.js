@@ -1,10 +1,15 @@
 import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { nextStep, previousStep, setImages } from '../ducks/list';
+import { nextStep, previousStep, setProperty } from '../ducks/list';
 import { stepMap } from './stepMap';
 
-export const Images = ({ currentStep, setImages, nextStep, previousStep }) => {
+export const Images = ({
+  currentStep,
+  nextStep,
+  previousStep,
+  setProperty,
+}) => {
   const [data, setData] = useState({
     image1: '',
     image2: '',
@@ -14,7 +19,7 @@ export const Images = ({ currentStep, setImages, nextStep, previousStep }) => {
   });
 
   const increaseStep = (data, currentStep) => {
-    setImages(data);
+    setProperty('images', data);
     nextStep(currentStep);
   };
 
@@ -107,7 +112,7 @@ Images.propTypes = {
   currentStep: PropTypes.number.isRequired,
   nextStep: PropTypes.func.isRequired,
   previousStep: PropTypes.func.isRequired,
-  setImages: PropTypes.func.isRequired,
+  setProperty: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -117,5 +122,5 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   nextStep,
   previousStep,
-  setImages,
+  setProperty,
 })(Images);

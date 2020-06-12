@@ -1,17 +1,17 @@
 import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { nextStep, previousStep, setPrice } from '../ducks/list';
+import { nextStep, previousStep, setProperty } from '../ducks/list';
 import { stepMap } from './stepMap';
 
-export const Price = ({ currentStep, setPrice, nextStep, previousStep }) => {
+export const Price = ({ currentStep, nextStep, previousStep, setProperty }) => {
   const [data, setData] = useState({
     price: '',
   });
   const { price } = data;
 
   const increaseStep = (data, currentStep) => {
-    setPrice(price);
+    setProperty('price', price);
     nextStep(currentStep);
   };
 
@@ -75,7 +75,7 @@ Price.propTypes = {
   currentStep: PropTypes.number.isRequired,
   nextStep: PropTypes.func.isRequired,
   previousStep: PropTypes.func.isRequired,
-  setPrice: PropTypes.func.isRequired,
+  setProperty: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -85,5 +85,5 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   nextStep,
   previousStep,
-  setPrice,
+  setProperty,
 })(Price);

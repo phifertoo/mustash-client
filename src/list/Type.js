@@ -1,10 +1,10 @@
 import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { nextStep, setType } from '../ducks/list';
+import { nextStep, setProperty } from '../ducks/list';
 import { stepMap } from './stepMap';
 
-export const Type = ({ currentStep, nextStep, setType }) => {
+export const Type = ({ currentStep, nextStep, setProperty }) => {
   const [data, setData] = useState({
     bedroom: '',
     basement: '',
@@ -46,7 +46,7 @@ export const Type = ({ currentStep, nextStep, setType }) => {
     const type = Object.keys(data).find(
       (element) => data[element] === 'active'
     );
-    setType(type);
+    setProperty('type', type);
   };
 
   return (
@@ -107,11 +107,11 @@ export const Type = ({ currentStep, nextStep, setType }) => {
 Type.propTypes = {
   currentStep: PropTypes.number.isRequired,
   nextStep: PropTypes.func.isRequired,
-  setType: PropTypes.func.isRequired,
+  setProperty: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   currentStep: state.space.currentStep,
 });
 
-export default connect(mapStateToProps, { nextStep, setType })(Type);
+export default connect(mapStateToProps, { nextStep, setProperty })(Type);

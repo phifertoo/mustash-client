@@ -117,7 +117,7 @@ export const previousStep = (currentStep) => (dispatch) => {
   try {
     dispatch({ type: 'PREVIOUS_STEP', payload: currentStep });
   } catch (err) {
-    dispatch({ type: '[REVIOUSSTEP_FAIL' });
+    dispatch({ type: 'PREVIOUSSTEP_FAIL' });
   }
 };
 
@@ -129,77 +129,85 @@ export const setStep = (currentStep) => (dispatch) => {
   }
 };
 
-export const setDimensions = (dimensions) => (dispatch) => {
+export const setProperty = (type, property) => (dispatch) => {
   try {
-    dispatch({ type: 'SET_DIMENSIONS', payload: dimensions });
+    dispatch({ type: `SET_${type.toUpperCase()}`, payload: property });
   } catch (err) {
-    dispatch({ type: 'DIMENSIONS_FAIL' });
+    dispatch({ type: 'SETPROPERTY_FAIL' });
   }
 };
 
-export const setType = (type) => (dispatch) => {
-  try {
-    dispatch({ type: 'SET_TYPE', payload: type });
-  } catch (err) {
-    dispatch({ type: 'TYPE_FAIL' });
-  }
-};
+// export const setDimensions = (dimensions) => (dispatch) => {
+//   try {
+//     dispatch({ type: 'SET_DIMENSIONS', payload: dimensions });
+//   } catch (err) {
+//     dispatch({ type: 'DIMENSIONS_FAIL' });
+//   }
+// };
 
-export const setAddress = (address) => (dispatch) => {
-  try {
-    dispatch({ type: 'SET_ADDRESS', payload: address });
-  } catch (err) {
-    dispatch({ type: 'ADDRESS_FAIL' });
-  }
-};
+// export const setType = (type) => (dispatch) => {
+//   try {
+//     dispatch({ type: 'SET_TYPE', payload: type });
+//   } catch (err) {
+//     dispatch({ type: 'TYPE_FAIL' });
+//   }
+// };
 
-export const setContent = (content) => (dispatch) => {
-  try {
-    dispatch({ type: 'SET_CONTENT', payload: content });
-  } catch (err) {
-    dispatch({ type: 'CONTENT_FAIL' });
-  }
-};
+// export const setAddress = (address) => (dispatch) => {
+//   try {
+//     dispatch({ type: 'SET_ADDRESS', payload: address });
+//   } catch (err) {
+//     dispatch({ type: 'ADDRESS_FAIL' });
+//   }
+// };
 
-export const setFrequency = (frequency) => (dispatch) => {
-  try {
-    dispatch({ type: 'SET_FREQUENCY', payload: frequency });
-  } catch (err) {
-    dispatch({ type: 'FREQUENCY_FAIL' });
-  }
-};
+// export const setContent = (content) => (dispatch) => {
+//   try {
+//     dispatch({ type: 'SET_CONTENT', payload: content });
+//   } catch (err) {
+//     dispatch({ type: 'CONTENT_FAIL' });
+//   }
+// };
 
-export const setAccess = (access) => (dispatch) => {
-  try {
-    dispatch({ type: 'SET_ACCESS', payload: access });
-  } catch (err) {
-    dispatch({ type: 'ACCESS_FAIL' });
-  }
-};
+// export const setFrequency = (frequency) => (dispatch) => {
+//   try {
+//     dispatch({ type: 'SET_FREQUENCY', payload: frequency });
+//   } catch (err) {
+//     dispatch({ type: 'FREQUENCY_FAIL' });
+//   }
+// };
 
-export const setTitleDescription = (titleDescription) => (dispatch) => {
-  try {
-    dispatch({ type: 'SET_TITLEDESCRIPTION', payload: titleDescription });
-  } catch (err) {
-    dispatch({ type: 'TITLEDESCRIPTION_FAIL' });
-  }
-};
+// export const setAccess = (access) => (dispatch) => {
+//   try {
+//     dispatch({ type: 'SET_ACCESS', payload: access });
+//   } catch (err) {
+//     dispatch({ type: 'ACCESS_FAIL' });
+//   }
+// };
 
-export const setPrice = (price) => (dispatch) => {
-  try {
-    dispatch({ type: 'SET_PRICE', payload: price });
-  } catch (err) {
-    dispatch({ type: 'PRICE_FAIL' });
-  }
-};
+// export const setTitleDescription = (titleDescription) => (dispatch) => {
+//   try {
+//     dispatch({ type: 'SET_TITLEDESCRIPTION', payload: titleDescription });
+//   } catch (err) {
+//     dispatch({ type: 'TITLEDESCRIPTION_FAIL' });
+//   }
+// };
 
-export const setImages = (images) => (dispatch) => {
-  try {
-    dispatch({ type: 'SET_IMAGES', payload: images });
-  } catch (err) {
-    dispatch({ type: 'IMAGES_FAIL' });
-  }
-};
+// export const setPrice = (price) => (dispatch) => {
+//   try {
+//     dispatch({ type: 'SET_PRICE', payload: price });
+//   } catch (err) {
+//     dispatch({ type: 'PRICE_FAIL' });
+//   }
+// };
+
+// export const setImages = (images) => (dispatch) => {
+//   try {
+//     dispatch({ type: 'SET_IMAGES', payload: images });
+//   } catch (err) {
+//     dispatch({ type: 'IMAGES_FAIL' });
+//   }
+// };
 
 export const submitSpace = (data) => async (dispatch) => {
   const config = {
