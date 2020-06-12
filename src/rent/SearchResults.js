@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
-import { withGoogleMap, GoogleMap, Marker } from "react-google-maps";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import Navbar from "../layout/Navbar";
-import SearchItem from "./SearchItem";
-import { searchListings } from "../actions/searchListings";
+import React, { useEffect } from 'react';
+import { withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import Navbar from '../layout/Navbar';
+import SearchItem from './SearchItem';
+import { searchListings } from '../actions/searchListings';
 
 export const SearchResults = ({
   searchAddress,
@@ -24,7 +24,6 @@ export const SearchResults = ({
     });
     return acc;
   }, []);
-
   const GoogleMapExample = withGoogleMap(() => {
     return (
       <GoogleMap defaultCenter={center} defaultZoom={13}>
@@ -47,10 +46,10 @@ export const SearchResults = ({
           <div
             style={{
               height: 350,
-              width: "100%",
-              display: "flex",
-              flexFlow: "row nowrap",
-              justifyContent: "center",
+              width: '100%',
+              display: 'flex',
+              flexFlow: 'row nowrap',
+              justifyContent: 'center',
               padding: 0,
             }}
           />
@@ -58,22 +57,20 @@ export const SearchResults = ({
         mapElement={
           <div
             style={{
-              width: "100%",
+              width: '100%',
               marginLeft: 0,
             }}
           />
         }
       />
-      <h1 className="large text-primary">Search Results</h1>
-      <div className="">
-        {searchResults.length > 0 ? (
-          searchResults.map((element, index) => (
-            <SearchItem key={index} searchItem={element} />
-          ))
-        ) : (
-          <h4>No results found...</h4>
-        )}
-      </div>
+      <h1 className='large text-primary'>Search Results</h1>
+      {searchResults.length > 0 ? (
+        searchResults.map((element, index) => (
+          <SearchItem key={index} searchItem={element} />
+        ))
+      ) : (
+        <h4>No results found...</h4>
+      )}
     </div>
   );
 };

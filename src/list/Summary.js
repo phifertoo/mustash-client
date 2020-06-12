@@ -35,6 +35,7 @@ export const Summary = ({
       description,
       title,
       images,
+      token: localStorage.token,
     };
     submitSpace(data).then((result) => {
       if (result.error) {

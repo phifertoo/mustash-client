@@ -1,114 +1,113 @@
-import axios from "axios";
+import axios from 'axios';
 
 export const nextStep = (currentStep) => (dispatch) => {
   try {
-    dispatch({ type: "NEXT_STEP", payload: currentStep });
+    dispatch({ type: 'NEXT_STEP', payload: currentStep });
   } catch (err) {
-    dispatch({ type: "NEXTSTEP_FAIL" });
+    dispatch({ type: 'NEXTSTEP_FAIL' });
   }
 };
 
 export const previousStep = (currentStep) => (dispatch) => {
   try {
-    dispatch({ type: "PREVIOUS_STEP", payload: currentStep });
+    dispatch({ type: 'PREVIOUS_STEP', payload: currentStep });
   } catch (err) {
-    dispatch({ type: "[REVIOUSSTEP_FAIL" });
+    dispatch({ type: '[REVIOUSSTEP_FAIL' });
   }
 };
 
 export const setStep = (currentStep) => (dispatch) => {
   try {
-    dispatch({ type: "SET_STEP", payload: currentStep });
+    dispatch({ type: 'SET_STEP', payload: currentStep });
   } catch (err) {
-    dispatch({ type: "SETSTEP_FAIL" });
+    dispatch({ type: 'SETSTEP_FAIL' });
   }
 };
 
 export const setDimensions = (dimensions) => (dispatch) => {
   try {
-    dispatch({ type: "SET_DIMENSIONS", payload: dimensions });
+    dispatch({ type: 'SET_DIMENSIONS', payload: dimensions });
   } catch (err) {
-    dispatch({ type: "DIMENSIONS_FAIL" });
+    dispatch({ type: 'DIMENSIONS_FAIL' });
   }
 };
 
 export const setType = (type) => (dispatch) => {
   try {
-    dispatch({ type: "SET_TYPE", payload: type });
+    dispatch({ type: 'SET_TYPE', payload: type });
   } catch (err) {
-    dispatch({ type: "TYPE_FAIL" });
+    dispatch({ type: 'TYPE_FAIL' });
   }
 };
 
 export const setAddress = (address) => (dispatch) => {
   try {
-    dispatch({ type: "SET_ADDRESS", payload: address });
+    dispatch({ type: 'SET_ADDRESS', payload: address });
   } catch (err) {
-    dispatch({ type: "ADDRESS_FAIL" });
+    dispatch({ type: 'ADDRESS_FAIL' });
   }
 };
 
 export const setContent = (content) => (dispatch) => {
   try {
-    dispatch({ type: "SET_CONTENT", payload: content });
+    dispatch({ type: 'SET_CONTENT', payload: content });
   } catch (err) {
-    dispatch({ type: "CONTENT_FAIL" });
+    dispatch({ type: 'CONTENT_FAIL' });
   }
 };
 
 export const setFrequency = (frequency) => (dispatch) => {
   try {
-    dispatch({ type: "SET_FREQUENCY", payload: frequency });
+    dispatch({ type: 'SET_FREQUENCY', payload: frequency });
   } catch (err) {
-    dispatch({ type: "FREQUENCY_FAIL" });
+    dispatch({ type: 'FREQUENCY_FAIL' });
   }
 };
 
 export const setAccess = (access) => (dispatch) => {
   try {
-    dispatch({ type: "SET_ACCESS", payload: access });
+    dispatch({ type: 'SET_ACCESS', payload: access });
   } catch (err) {
-    dispatch({ type: "ACCESS_FAIL" });
+    dispatch({ type: 'ACCESS_FAIL' });
   }
 };
 
 export const setTitleDescription = (titleDescription) => (dispatch) => {
   try {
-    dispatch({ type: "SET_TITLEDESCRIPTION", payload: titleDescription });
+    dispatch({ type: 'SET_TITLEDESCRIPTION', payload: titleDescription });
   } catch (err) {
-    dispatch({ type: "TITLEDESCRIPTION_FAIL" });
+    dispatch({ type: 'TITLEDESCRIPTION_FAIL' });
   }
 };
 
 export const setPrice = (price) => (dispatch) => {
   try {
-    dispatch({ type: "SET_PRICE", payload: price });
+    dispatch({ type: 'SET_PRICE', payload: price });
   } catch (err) {
-    dispatch({ type: "PRICE_FAIL" });
+    dispatch({ type: 'PRICE_FAIL' });
   }
 };
 
 export const setImages = (images) => (dispatch) => {
   try {
-    dispatch({ type: "SET_IMAGES", payload: images });
+    dispatch({ type: 'SET_IMAGES', payload: images });
   } catch (err) {
-    dispatch({ type: "IMAGES_FAIL" });
+    dispatch({ type: 'IMAGES_FAIL' });
   }
 };
 
 export const submitSpace = (data) => async (dispatch) => {
   const config = {
     headers: {
-      "Content-Type": "multipart/form-data",
-      "x-auth-token":
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXIiOiI1ZWJlNGE1ZjQ0YjBlYzJjZTg0Mjk0YzIifSwiaWF0IjoxNTkxODA3NjI0LCJleHAiOjE1OTE5MDc2MjR9.mlFjh3Wr3WTcUV6LYmMan1JqsYh9KQlrq2yxDK6fjko",
+      'Content-Type': 'multipart/form-data',
+      'x-auth-token': data.token,
     },
   };
 
   const body = new FormData();
 
   Object.keys(data).forEach((element) => {
-    if (element !== "size" || element !== "images") {
+    if (element !== 'size' || element !== 'images') {
       body.append(element, data[element]);
     }
   });
@@ -118,7 +117,7 @@ export const submitSpace = (data) => async (dispatch) => {
    until all the async functions finish using "await Promise.all()" */
   await Promise.all(
     Object.keys(images).map(async (element) => {
-      if (images[element] !== "")
+      if (images[element] !== '')
         body.append(
           `${element}`,
 
@@ -131,11 +130,11 @@ export const submitSpace = (data) => async (dispatch) => {
   ) => body.append(element, data.size[element]));
 
   try {
-    const res = await axios.post("/api/listing", body, config);
-    dispatch({ type: "SUBMITSPACE_SUCCESS", payload: res.data });
+    const res = await axios.post('/api/listing', body, config);
+    dispatch({ type: 'SUBMITSPACE_SUCCESS', payload: res.data });
     return res;
   } catch (err) {
-    dispatch({ type: "SUBMITSPACE_FAIL" });
+    dispatch({ type: 'SUBMITSPACE_FAIL' });
     console.log(err.response.data.errors);
   }
 };
