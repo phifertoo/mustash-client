@@ -2,7 +2,7 @@ import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 
 const initialState = {
-  token: '',
+  token: localStorage.getItem('token'),
   isAuthenticated: false,
   user: null,
 };
@@ -14,6 +14,9 @@ export default function (state = initialState, action) {
     case 'REGISTER_SUCCESS':
       localStorage.setItem('token', payload.token);
       return { ...state, isAuthenticated: true };
+    case 'LOGOUT_SUCCESS':
+      localStorage.removeItem('token');
+      return { ...state, token: null, isAuthenticated: false };
     default:
       return state;
   }
@@ -56,13 +59,13 @@ export const register = ({ name, email, password }) => async (dispatch) => {
   }
 };
 
-export const login = ({ name, email }) => async (dispatch) => {
+export const login = ({ email, password }) => async (dispatch) => {
   const config = {
     headers: {
       'Content-Type': 'application/json',
     },
   };
-  const body = JSON.stringify({ name, email });
+  const body = JSON.stringify({ email, password });
   try {
     const res = await axios.post('api/auth', body, config);
     dispatch({ type: 'LOGIN_SUCCESS', payload: res.data });
@@ -75,9 +78,12 @@ export const login = ({ name, email }) => async (dispatch) => {
   }
 };
 
+export const logout = () => async (dispatch) => {
+  dispatch({ type: 'LOGOUT_SUCCESS' });
+};
+
 export const isAuthenticated = () => {
   if (localStorage.getItem('jwt')) {
-    console.log(localStorage.getItem('jwt'));
     return JSON.parse(localStorage.getItem('jwt'));
   } else {
     return false;
