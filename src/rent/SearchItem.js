@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getImages } from '../ducks/searchListings';
+import { getImages, selectResult } from '../ducks/searchListings';
 
-const SearchItem = ({ searchItem, getImages }) => {
+const SearchItem = ({ searchItem, getImages, selectResult, index }) => {
+  const handleClick = (index) => {
+    selectResult(index);
+  };
   // const [data, setData] = useState({
   //   encodedImage: '',
   // });
@@ -40,6 +43,9 @@ const SearchItem = ({ searchItem, getImages }) => {
             src={searchItem.s3Images.image1.url}
             className='card-img-left'
             alt='not working'
+            onClick={() => {
+              handleClick(index);
+            }}
           ></img>
         </div>
         <div className='col-md-8'>
@@ -73,8 +79,12 @@ const SearchItem = ({ searchItem, getImages }) => {
 SearchItem.propTypes = {
   searchItem: PropTypes.object.isRequired,
   getImages: PropTypes.func.isRequired,
+  selectResult: PropTypes.func.isRequired,
+  index: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = (state) => ({});
 
-export default connect(mapStateToProps, { getImages })(SearchItem);
+export default connect(mapStateToProps, { getImages, selectResult })(
+  SearchItem
+);

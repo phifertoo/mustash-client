@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import Navbar from '../layout/Navbar';
 import SearchItem from './SearchItem';
 import { searchListings } from '../ducks/searchListings';
+import SearchItemProfile from './SearchItemProfile';
 
 export const SearchResults = ({
   searchAddress,
@@ -66,11 +67,12 @@ export const SearchResults = ({
       <h1 className='large text-primary'>Search Results</h1>
       {searchResults.length > 0 ? (
         searchResults.map((element, index) => (
-          <SearchItem key={index} searchItem={element} />
+          <SearchItem key={index} index={index} searchItem={element} />
         ))
       ) : (
         <h4>No results found...</h4>
       )}
+      <SearchItemProfile />
     </div>
   );
 };

@@ -493,6 +493,26 @@ $body-bg: white;
   border: 2px solid red;
 }
 
+//________________________________________________Sidebar_________________________________________________________________________
+
+.search-item-profile-container {
+}
+
+.search-item-profile-main-image-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.search-item-profile-main-image {
+  width: 45%;
+}
+
+.image-thumbnails-container {
+  display: flex;
+  justify-content: center;
+}
+
 // _________________________________________________Media Queries_________________________________________________________________________
 
 @media only screen and (min-width: 576px) {

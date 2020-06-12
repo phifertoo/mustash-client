@@ -5,6 +5,7 @@ const initialState = {
   searchAddress: '1710 Tyler Drive, Monterey Park, CA 91755',
   searchRadius: 5,
   center: { lat: 0, lng: 0 },
+  selectedResultIndex: -1,
 };
 
 export default function (state = initialState, action) {
@@ -21,6 +22,11 @@ export default function (state = initialState, action) {
         ...state,
         searchResults: payload.locations,
         center: payload.center,
+      };
+    case 'SELECTRESULTINDEX_SUCCESS':
+      return {
+        ...state,
+        selectedResultIndex: payload,
       };
     default:
       return state;
@@ -61,5 +67,13 @@ export const getImages = (id) => async (dispatch) => {
     return res.data;
   } catch (err) {
     console.log(err);
+  }
+};
+
+export const selectResult = (index) => async (dispatch) => {
+  try {
+    dispatch({ type: 'SELECTRESULTINDEX_SUCCESS', payload: index });
+  } catch (err) {
+    dispatch({ type: 'SELECTRESULTINDEX_FAIL' });
   }
 };
