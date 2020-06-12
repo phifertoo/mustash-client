@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { previousStep, setStep, submitSpace } from '../actions/list';
+import { previousStep, setStep, submitSpace } from '../ducks/list';
 import { stepMap } from './stepMap';
 
 export const Summary = ({

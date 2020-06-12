@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Navbar from '../layout/Navbar';
 import SearchItem from './SearchItem';
-import { searchListings } from '../actions/searchListings';
+import { searchListings } from '../ducks/searchListings';
 
 export const SearchResults = ({
   searchAddress,

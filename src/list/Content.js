@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { nextStep, previousStep, setContent, setType } from '../actions/list';
+import { nextStep, previousStep, setContent, setType } from '../ducks/list';
 import { stepMap } from './stepMap';
 import large_items from '../assets/large_items.png';
 import large_vehicles from '../assets/large_vehicle.png';

@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { nextStep, previousStep, setFrequency } from '../actions/list';
+import { nextStep, previousStep, setFrequency } from '../ducks/list';
 import { stepMap } from './stepMap';
 
 export const Frequency = ({

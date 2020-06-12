@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { nextStep, setType } from '../actions/list';
+import { nextStep, setType } from '../ducks/list';
 import { stepMap } from './stepMap';
 
 export const Type = ({ currentStep, nextStep, setType }) => {

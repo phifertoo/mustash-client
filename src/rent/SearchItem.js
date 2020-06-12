@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getImages } from '../actions/searchListings';
+import { getImages } from '../ducks/searchListings';
 
 const SearchItem = ({ searchItem, getImages }) => {
   // const [data, setData] = useState({

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { setStep } from '../actions/list';
+import { setStep } from '../ducks/list';
 
 export const Sidebar = ({ currentStep, setStep }) => {
   const stage = [
