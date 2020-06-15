@@ -1,11 +1,22 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getImages, selectResult } from '../ducks/searchListings';
+import {
+  getImages,
+  selectResultIndex,
+  selectResult,
+} from '../ducks/searchListings';
 
-const SearchItem = ({ searchItem, getImages, selectResult, index }) => {
+const SearchItem = ({
+  searchItem,
+  getImages,
+  selectResultIndex,
+  index,
+  selectResult,
+}) => {
   const handleClick = (index) => {
-    selectResult(index);
+    selectResultIndex(index);
+    selectResult(searchItem);
   };
   // const [data, setData] = useState({
   //   encodedImage: '',
@@ -67,8 +78,6 @@ const SearchItem = ({ searchItem, getImages, selectResult, index }) => {
               Eligible Contents:{' '}
               {searchItem.content.join('').replace(/,/g, ', ')}
             </p>
-
-            <p className='card-text'>Description: {searchItem.description}</p>
           </div>
         </div>
       </div>
@@ -79,12 +88,15 @@ const SearchItem = ({ searchItem, getImages, selectResult, index }) => {
 SearchItem.propTypes = {
   searchItem: PropTypes.object.isRequired,
   getImages: PropTypes.func.isRequired,
+  selectResultIndex: PropTypes.func.isRequired,
   selectResult: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = (state) => ({});
 
-export default connect(mapStateToProps, { getImages, selectResult })(
-  SearchItem
-);
+export default connect(mapStateToProps, {
+  getImages,
+  selectResultIndex,
+  selectResult,
+})(SearchItem);

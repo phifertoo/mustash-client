@@ -502,15 +502,69 @@ $body-bg: white;
   width: 100%;
   display: flex;
   justify-content: center;
+  background-color: #dcdcdc;
 }
 
 .search-item-profile-main-image {
-  width: 45%;
+  //only set the height or the width to keep the aspecte ratio with the img src tag
+  height: 500px;
 }
 
 .image-thumbnails-container {
   display: flex;
   justify-content: center;
+  margin-top: 70px;
+}
+
+.search-item-profile-container h4 {
+  text-align: center;
+  font-size: 40px;
+  font-weight: 700 !important;
+}
+
+.search-item-profile-type {
+  text-align: center;
+  margin-top: 40px;
+  width: 100%;
+  font-weight: 500 !important;
+}
+
+.search-item-profile-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.search-item-profile-details-container {
+  margin-top: 40px;
+}
+
+.nearby-listings-container {
+  overflow: auto;
+  white-space: nowrap;
+  display: flex;
+}
+
+.nearby-listing-card {
+  width: 300px;
+  display: inline-block;
+}
+
+.nearby-listing-card-image-container {
+  display: flex;
+  justify-content: center;
+}
+
+.nearby-listing-card-image {
+  height: 200px !important;
+  margin-top: 40px;
+}
+
+.nearby-listing-card-address {
+  white-space: normal;
+  word-break: break-word;
+  height: 100px;
+  max-width: 200px;
 }
 
 // _________________________________________________Media Queries_________________________________________________________________________

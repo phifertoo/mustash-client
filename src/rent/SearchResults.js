@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Fragment } from 'react';
 import { withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -13,6 +13,7 @@ export const SearchResults = ({
   searchResults,
   searchListings,
   center,
+  selectedResult,
 }) => {
   useEffect(() => {
     searchListings(searchAddress, searchRadius);
@@ -39,41 +40,58 @@ export const SearchResults = ({
     );
   });
 
+  const showSearchResults = () => {
+    if (searchResults.length > 0) {
+      return searchResults.map((element, index) => (
+        <SearchItem key={index} index={index} searchItem={element} />
+      ));
+    } else {
+      return <h4>No results found...</h4>;
+    }
+  };
+
+  console.log(searchListings);
+
   return (
-    <div>
-      <Navbar />
-      <GoogleMapExample
-        containerElement={
-          <div
-            style={{
-              height: 350,
-              width: '100%',
-              display: 'flex',
-              flexFlow: 'row nowrap',
-              justifyContent: 'center',
-              padding: 0,
-            }}
-          />
-        }
-        mapElement={
-          <div
-            style={{
-              width: '100%',
-              marginLeft: 0,
-            }}
-          />
-        }
-      />
-      <h1 className='large text-primary'>Search Results</h1>
-      {searchResults.length > 0 ? (
-        searchResults.map((element, index) => (
-          <SearchItem key={index} index={index} searchItem={element} />
-        ))
-      ) : (
-        <h4>No results found...</h4>
-      )}
-      <SearchItemProfile />
-    </div>
+    <Fragment>
+      <div>
+        <Navbar />
+        <GoogleMapExample
+          containerElement={
+            <div
+              style={{
+                height: 350,
+                width: '100%',
+                display: 'flex',
+                flexFlow: 'row nowrap',
+                justifyContent: 'center',
+                padding: 0,
+              }}
+            />
+          }
+          mapElement={
+            <div
+              style={{
+                width: '100%',
+                marginLeft: 0,
+              }}
+            />
+          }
+        />
+        {Object.keys(selectedResult).length === 0 ? (
+          <h1 className='large text-primary'>Search Results</h1>
+        ) : (
+          ''
+        )}
+        {Object.keys(selectedResult).length === 0 ? (
+          showSearchResults()
+        ) : (
+          <div>
+            <SearchItemProfile />
+          </div>
+        )}
+      </div>
+    </Fragment>
   );
 };
 
@@ -83,6 +101,7 @@ SearchResults.propTypes = {
   searchAddress: PropTypes.string.isRequired,
   searchRadius: PropTypes.number.isRequired,
   center: PropTypes.object.isRequired,
+  selectedResult: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -90,6 +109,7 @@ const mapStateToProps = (state) => ({
   searchAddress: state.searchListings.searchAddress,
   searchRadius: state.searchListings.searchRadius,
   center: state.searchListings.center,
+  selectedResult: state.searchListings.selectedResult,
 });
 
 export default connect(mapStateToProps, { searchListings })(SearchResults);
