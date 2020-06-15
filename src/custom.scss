@@ -496,13 +496,13 @@ $body-bg: white;
 //________________________________________________Sidebar_________________________________________________________________________
 
 .search-item-profile-container {
+  margin-top: 30px;
 }
 
 .search-item-profile-main-image-container {
   width: 100%;
   display: flex;
   justify-content: center;
-  background-color: #dcdcdc;
 }
 
 .search-item-profile-main-image {
@@ -516,9 +516,10 @@ $body-bg: white;
   margin-top: 70px;
 }
 
-.search-item-profile-container h4 {
+.container h4 {
   text-align: center;
   font-size: 40px;
+  margin-top: 30px;
   font-weight: 700 !important;
 }
 
@@ -526,6 +527,7 @@ $body-bg: white;
   text-align: center;
   margin-top: 40px;
   width: 100%;
+  font-size: 40px !important;
   font-weight: 500 !important;
 }
 
@@ -540,14 +542,16 @@ $body-bg: white;
 }
 
 .nearby-listings-container {
+  margin-top: 20px;
   overflow: auto;
   white-space: nowrap;
-  display: flex;
 }
 
 .nearby-listing-card {
-  width: 300px;
+  width: 250px;
   display: inline-block;
+  border: 2px solid #dcdcdc;
+  border-radius: 5px;
 }
 
 .nearby-listing-card-image-container {
@@ -557,7 +561,7 @@ $body-bg: white;
 
 .nearby-listing-card-image {
   height: 200px !important;
-  margin-top: 40px;
+  padding: 20px 20px 0 20px;
 }
 
 .nearby-listing-card-address {

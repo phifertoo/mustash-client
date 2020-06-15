@@ -1,11 +1,7 @@
 import React, { Fragment, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import {
-  findNearListings,
-  selectResultIndex,
-  selectResult,
-} from '../ducks/searchListings';
+import { findNearListings, selectResult } from '../ducks/searchListings';
 
 const SearchItemProfile = ({
   findNearListings,
@@ -13,14 +9,13 @@ const SearchItemProfile = ({
   selectedResult,
   selectResult,
 }) => {
-  let searchItem = selectedResult;
   const nearbyListingsArray = nearbyListings.locations;
 
   useEffect(() => {
-    if (searchItem) {
-      findNearListings(searchItem.addressString, 5);
+    if (selectedResult) {
+      findNearListings(selectedResult.addressString, 1);
     }
-  }, [findNearListings, searchItem]);
+  }, [findNearListings, selectedResult]);
 
   const handleClick = (selectedResult) => {
     selectResult(selectedResult);
@@ -28,55 +23,62 @@ const SearchItemProfile = ({
 
   return (
     <Fragment>
-      {searchItem && (
+      {selectedResult && (
         <div className='search-item-profile-container'>
-          <h4>{searchItem.addressString}</h4>
           <div className='search-item-profile-main-image-container '>
-            {searchItem && (
+            {selectedResult && (
               <img
-                src={searchItem.s3Images.image1.url}
+                src={selectedResult.s3Images.image1.url}
                 className='search-item-profile-main-image'
                 alt=''
               />
             )}
           </div>
           <div className='image-thumbnails-container'>
-            {Object.keys(searchItem.s3Images).map((element, index) => (
+            {Object.keys(selectedResult.s3Images).map((element, index) => (
               <a
                 key={index}
                 target='_blank'
-                href={searchItem.s3Images[element].url}
+                href={selectedResult.s3Images[element].url}
                 className='mr-3'
               >
                 {index !== 0 && (
-                  <img src={searchItem.s3Images[element].url} alt='Forest' />
+                  <img
+                    src={selectedResult.s3Images[element].url}
+                    alt='No picture'
+                  />
                 )}
               </a>
             ))}
           </div>
-
-          <div className='container'>
-            <h1 className='display-4 search-item-profile-type'>
-              {searchItem.typeString}
-            </h1>
+          <div className='container '>
+            <hr />
+            <h4>{selectedResult.addressString}</h4>
 
             <div className='search-item-profile-button-container'>
-              <button className='btn-lg btn-danger'>Reserve Now</button>
+              <button className='btn-lg btn-danger mb-3'>Reserve Now</button>
             </div>
+            <hr />
+
             <div className='search-item-profile-details-container'>
-              <p className='lead'>$/Mo: ${searchItem.price}</p>
+              <p className='lead'>Type: ${selectedResult.typeString}</p>
+
+              <p className='lead'>$/Mo: ${selectedResult.price}</p>
               <p className='lead'>
                 Size:{' '}
-                {`${searchItem.size.length} ft (length) x ${searchItem.size.width} ft (width) x ${searchItem.size.height} ft (height)`}
+                {`${selectedResult.size.length} ft (length) x ${selectedResult.size.width} ft (width) x ${selectedResult.size.height} ft (height)`}
               </p>
-              <p className='lead'>Access: {searchItem.accessString}</p>
-              <p className='lead'>Frequency: {searchItem.frequencyString}</p>
+              <p className='lead'>Access: {selectedResult.accessString}</p>
+              <p className='lead'>
+                Frequency: {selectedResult.frequencyString}
+              </p>
               <p className='lead'>
                 Eligible Contents:{' '}
-                {searchItem.content.join('').replace(/,/g, ', ')}
+                {selectedResult.content.join('').replace(/,/g, ', ')}
               </p>
-              <p className='lead'>Description: {searchItem.description}</p>
+              <p className='lead'>Description: {selectedResult.description}</p>
             </div>
+            <hr />
             <h1>Nearby Listings:</h1>
             <div className='nearby-listings-container'>
               {nearbyListingsArray &&

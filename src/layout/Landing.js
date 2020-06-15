@@ -8,9 +8,13 @@ import PropTypes from 'prop-types';
 /* 1.npm install aos 2. import AOS from 'aos' 3. import 'aos/dist/aos.css' 4. AOS.init() in useEffect*/
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import { searchListings, saveSearchQuery } from '../ducks/searchListings';
+import {
+  searchListings,
+  saveSearchQuery,
+  clearSelectedResult,
+} from '../ducks/searchListings';
 
-export const Landing = ({ saveSearchQuery }) => {
+export const Landing = ({ saveSearchQuery, clearSelectedResult }) => {
   const [data, setData] = useState({
     address: '',
     radius: 0,
@@ -32,6 +36,7 @@ export const Landing = ({ saveSearchQuery }) => {
 
   useEffect(() => {
     AOS.init();
+    clearSelectedResult();
 
     // if (redirect) {
     //   return <Redirect to="/searchlistings" />;
@@ -127,10 +132,13 @@ export const Landing = ({ saveSearchQuery }) => {
 Landing.propTypes = {
   searchListings: PropTypes.func.isRequired,
   saveSearchQuery: PropTypes.func.isRequired,
+  clearSelectedResult: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({});
 
-export default connect(mapStateToProps, { searchListings, saveSearchQuery })(
-  Landing
-);
+export default connect(mapStateToProps, {
+  searchListings,
+  saveSearchQuery,
+  clearSelectedResult,
+})(Landing);

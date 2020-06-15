@@ -19,13 +19,22 @@ export const SearchResults = ({
     searchListings(searchAddress, searchRadius);
   }, [searchListings, searchRadius, searchAddress]);
 
-  const searchArray = searchResults.reduce((acc, nextVal) => {
+  let searchArray = searchResults.reduce((acc, nextVal) => {
     acc.push({
       lat: nextVal.location.coordinates[1],
       lng: nextVal.location.coordinates[0],
     });
     return acc;
   }, []);
+  if (Object.keys(selectedResult).length > 0) {
+    searchArray = [
+      {
+        lat: selectedResult.location.coordinates[1],
+        lng: selectedResult.location.coordinates[0],
+      },
+    ];
+  }
+
   const GoogleMapExample = withGoogleMap(() => {
     return (
       <GoogleMap defaultCenter={center} defaultZoom={13}>

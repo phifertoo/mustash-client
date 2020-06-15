@@ -1,21 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import {
-  getImages,
-  selectResultIndex,
-  selectResult,
-} from '../ducks/searchListings';
+import { getImages, selectResult } from '../ducks/searchListings';
 
-const SearchItem = ({
-  searchItem,
-  getImages,
-  selectResultIndex,
-  index,
-  selectResult,
-}) => {
+const SearchItem = ({ searchItem, getImages, index, selectResult }) => {
   const handleClick = (index) => {
-    selectResultIndex(index);
     selectResult(searchItem);
   };
   // const [data, setData] = useState({
@@ -88,7 +77,6 @@ const SearchItem = ({
 SearchItem.propTypes = {
   searchItem: PropTypes.object.isRequired,
   getImages: PropTypes.func.isRequired,
-  selectResultIndex: PropTypes.func.isRequired,
   selectResult: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired,
 };
@@ -97,6 +85,5 @@ const mapStateToProps = (state) => ({});
 
 export default connect(mapStateToProps, {
   getImages,
-  selectResultIndex,
   selectResult,
 })(SearchItem);
