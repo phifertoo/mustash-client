@@ -62,6 +62,7 @@ export const searchListings = (searchAddress, searchRadius) => async (
       searchRadius,
     },
   };
+  console.log(searchAddress, searchRadius);
   try {
     const res = await axios.get('/api/listing', config);
     dispatch({ type: 'SEARCHLISTINGS_SUCCESS', payload: res.data });

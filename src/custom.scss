@@ -493,7 +493,18 @@ $body-bg: white;
   border: 2px solid red;
 }
 
-//________________________________________________Sidebar_________________________________________________________________________
+//________________________________________________SearchItem_________________________________________________________________________
+
+.search-item-card-right-container {
+  display: flex;
+}
+
+.search-item-card-button-container {
+  display: flex;
+  align-items: center;
+}
+
+//________________________________________________SearchItemProfile_________________________________________________________________________
 
 .search-item-profile-container {
   margin-top: 30px;

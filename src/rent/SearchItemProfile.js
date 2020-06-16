@@ -61,7 +61,7 @@ const SearchItemProfile = ({
             <hr />
 
             <div className='search-item-profile-details-container'>
-              <p className='lead'>Type: ${selectedResult.typeString}</p>
+              <p className='lead'>Type: {selectedResult.typeString}</p>
 
               <p className='lead'>$/Mo: ${selectedResult.price}</p>
               <p className='lead'>

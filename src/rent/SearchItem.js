@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { getImages, selectResult } from '../ducks/searchListings';
 
 const SearchItem = ({ searchItem, getImages, index, selectResult }) => {
-  const handleClick = (index) => {
+  const handleClick = (searchItem) => {
     selectResult(searchItem);
   };
   // const [data, setData] = useState({
@@ -38,17 +38,16 @@ const SearchItem = ({ searchItem, getImages, index, selectResult }) => {
     <div className='card mb-3'>
       <div className='row no-gutters'>
         <div className='col-md-2'>
-          <img
-            // src={`data:image/png;base64,${data.encodedImage}`}
-            src={searchItem.s3Images.image1.url}
-            className='card-img-left'
-            alt='not working'
-            onClick={() => {
-              handleClick(index);
-            }}
-          ></img>
+          {searchItem.s3Images && (
+            <img
+              // src={`data:image/png;base64,${data.encodedImage}`}
+              src={searchItem.s3Images.image1.url}
+              className='card-img-left'
+              alt='not working'
+            ></img>
+          )}
         </div>
-        <div className='col-md-8'>
+        <div className='col-md-8 search-item-card-right-container'>
           <div className='card-body'>
             <h5 className='card-title'>
               {searchItem.title} : ${searchItem.price} per month
@@ -67,6 +66,16 @@ const SearchItem = ({ searchItem, getImages, index, selectResult }) => {
               Eligible Contents:{' '}
               {searchItem.content.join('').replace(/,/g, ', ')}
             </p>
+          </div>
+          <div className='search-item-card-button-container'>
+            <button
+              className='btn-lg btn-danger'
+              onClick={() => {
+                handleClick(searchItem);
+              }}
+            >
+              Full Profile
+            </button>
           </div>
         </div>
       </div>
