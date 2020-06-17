@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { previousStep, setStep, submitSpace } from '../ducks/list';
 import { stepMap } from './stepMap';
+import SellerDashboard from './SellerDashboard';
 
 export const Summary = ({
   currentStep,
@@ -207,6 +208,7 @@ export const Summary = ({
           </div>
         </div>
       )}
+      <SellerDashboard />
     </Fragment>
   );
 };

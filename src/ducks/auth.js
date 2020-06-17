@@ -13,10 +13,14 @@ export default function (state = initialState, action) {
     case 'LOGIN_SUCCESS':
     case 'REGISTER_SUCCESS':
       localStorage.setItem('token', payload.token);
-      return { ...state, isAuthenticated: true };
+      return { ...state, isAuthenticated: true, user: payload.user };
     case 'LOGOUT_SUCCESS':
       localStorage.removeItem('token');
-      return { ...state, token: null, isAuthenticated: false };
+      return {
+        ...state,
+        token: null,
+        isAuthenticated: false,
+      };
     default:
       return state;
   }

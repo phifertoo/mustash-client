@@ -8,6 +8,8 @@ import Landing from './layout/Landing.js';
 import ListSpace from './list/ListSpace';
 import SearchResults from './rent/SearchResults';
 import PrivateRoute from './routing/PrivateRoute';
+import SellerDashboard from './list/SellerDashboard';
+import { findSellerListings } from './ducks/updateListings';
 
 function App() {
   return (
@@ -18,8 +20,13 @@ function App() {
             <Route exact path='/' component={Landing} />
             <Route exact path='/login' component={Login} />
             <Route exact path='/register' component={Register} />
-            ] <Route exact path='/searchresults' component={SearchResults} />
+            <Route exact path='/searchresults' component={SearchResults} />
             <PrivateRoute exact path='/getstarted' component={ListSpace} />
+            <PrivateRoute
+              exact
+              path='/sellerdashboard'
+              component={SellerDashboard}
+            />
           </Switch>
         </Fragment>
       </Router>
