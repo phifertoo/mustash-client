@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import Navbar from '../layout/Navbar';
 import MyListings from './MyListings';
+import UpdateListing from './UpdateListing';
 
 export const Dashboard = ({ seller_id, findSellerListings }) => {
   const categories = ['My Listings', 'My Rentals', 'Inbox', 'Profile'];
@@ -19,6 +20,7 @@ export const Dashboard = ({ seller_id, findSellerListings }) => {
             ))}
           </div>
           <MyListings />
+          <UpdateListing />
         </div>
       </div>
     </Fragment>
