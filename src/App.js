@@ -8,8 +8,7 @@ import Landing from './layout/Landing.js';
 import ListSpace from './list/ListSpace';
 import SearchResults from './rent/SearchResults';
 import PrivateRoute from './routing/PrivateRoute';
-import SellerDashboard from './list/SellerDashboard';
-import { findSellerListings } from './ducks/updateListings';
+import Dashboard from './dashboard/Dashboard';
 
 function App() {
   return (
@@ -22,11 +21,7 @@ function App() {
             <Route exact path='/register' component={Register} />
             <Route exact path='/searchresults' component={SearchResults} />
             <PrivateRoute exact path='/getstarted' component={ListSpace} />
-            <PrivateRoute
-              exact
-              path='/sellerdashboard'
-              component={SellerDashboard}
-            />
+            <Route exact path='/dashboard' component={Dashboard} />
           </Switch>
         </Fragment>
       </Router>

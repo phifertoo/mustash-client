@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const initialState = {
-  sellerListings: {},
+  sellerListings: [],
 };
 
 export default function (state = initialState, action) {

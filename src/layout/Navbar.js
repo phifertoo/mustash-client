@@ -38,14 +38,18 @@ export const Navbar = ({ isAuthenticated, logout }) => {
         )}
 
         <li className='nav-item active'>
-          <Link to='/register' className='nav-link mt-2'>
-            Sign Up
-          </Link>
+          {!isAuthenticated && (
+            <Link to='/register' className='nav-link mt-2'>
+              Sign Up
+            </Link>
+          )}
         </li>
         <li className='nav-item active'>
-          <a className='nav-link mt-2' href='#'>
-            About
-          </a>
+          {isAuthenticated && (
+            <Link to='/dashboard' className='nav-link mt-2'>
+              Dashboard
+            </Link>
+          )}
         </li>
       </ul>
     </nav>

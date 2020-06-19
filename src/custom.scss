@@ -471,7 +471,8 @@ $body-bg: white;
   padding-top: 20px;
 }
 
-.sidenav-stage-completed {
+.sidenav-stage-completed,
+.dashboard-categories {
   text-decoration: none;
   margin-top: 15px;
   font-size: 20px;
@@ -580,6 +581,46 @@ $body-bg: white;
   word-break: break-word;
   height: 100px;
   max-width: 200px;
+}
+// ________________________________________________Dashboard_________________________________________________________________________
+
+.dashboard-container {
+  height: 100vh;
+  display: flex;
+}
+
+.mylistings-container {
+  width: 100%;
+  margin: 10px 0 0 10px;
+}
+
+.mylistings-inner-container {
+  display: flex;
+}
+
+.mylistings-card-container {
+  width: 250px;
+  height: 450px;
+  border: 2px solid #dcdcdc;
+  margin-right: 10px;
+}
+
+.mylistings-card-image {
+  height: 250px;
+}
+
+// _________________________________________________Media Queries_________________________________________________________________________
+
+.dashboard-sidebar {
+  height: 100%;
+  width: 200px;
+  position: relative;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #e0e0e0;
+  overflow-x: hidden;
+  padding-top: 20px;
 }
 
 // _________________________________________________Media Queries_________________________________________________________________________

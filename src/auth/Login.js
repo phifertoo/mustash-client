@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Navbar from '../layout/Navbar';
 import { login } from '../ducks/auth';
 import PropTypes from 'prop-types';
 
-export const Landing = ({ login }) => {
+export const Landing = ({ login, isAuthenticated }) => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -18,6 +18,10 @@ export const Landing = ({ login }) => {
     e.preventDefault();
     login({ email, password });
   };
+
+  if (isAuthenticated) {
+    return <Redirect to='/dashboard' />;
+  }
 
   return (
     <div>
@@ -58,8 +62,11 @@ export const Landing = ({ login }) => {
 };
 Landing.propTypes = {
   login: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
 };
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
 
 export default connect(mapStateToProps, { login })(Landing);
