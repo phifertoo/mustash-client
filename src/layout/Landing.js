@@ -41,7 +41,7 @@ export const Landing = ({ saveSearchQuery, clearSelectedResult }) => {
     // if (redirect) {
     //   return <Redirect to="/searchlistings" />;
     // }
-  }, []);
+  }, [clearSelectedResult]);
   return (
     <Fragment>
       <Navbar />

@@ -21,7 +21,7 @@ export const MyListings = ({
       seller_id,
       token: localStorage.token,
     };
-    findSellerListings(input);
+    findSellerListings(input); // this is causing an unnecessary call that is throwing an error because there is no seller_id before login.
   }, [seller_id, findSellerListings]);
 
   const handleClick = (step, selectedListing) => {

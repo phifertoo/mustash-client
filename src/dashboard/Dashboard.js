@@ -3,8 +3,9 @@ import { connect } from 'react-redux';
 import Navbar from '../layout/Navbar';
 import MyListings from './MyListings';
 import UpdateListing from './UpdateListing';
+import PropTypes from 'prop-types';
 
-export const Dashboard = ({ seller_id, findSellerListings }) => {
+export const Dashboard = ({ selectedListing, isAuthenticated }) => {
   const categories = ['My Listings', 'My Rentals', 'Inbox', 'Profile'];
 
   return (
@@ -19,16 +20,22 @@ export const Dashboard = ({ seller_id, findSellerListings }) => {
               </div>
             ))}
           </div>
-          <MyListings />
-          <UpdateListing />
+          {isAuthenticated && <MyListings />}
+          {Object.keys(selectedListing).length > 0 && <UpdateListing />}
         </div>
       </div>
     </Fragment>
   );
 };
 
-Dashboard.propTypes = {};
+Dashboard.propTypes = {
+  selectedListing: PropTypes.object.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
+};
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  selectedListing: state.updateListings.selectedListing,
+  isAuthenticated: state.auth.isAuthenticated,
+});
 
 export default connect(mapStateToProps)(Dashboard);
