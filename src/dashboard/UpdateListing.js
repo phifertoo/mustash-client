@@ -22,13 +22,12 @@ export const UpdateListing = ({ step, selectedListing }) => {
       (element) => element === 'Large Items'
     ),
     // frequency: selectedListing.frequencyString,
-    monthly: '',
-    weekly: '',
-    daily: '',
+    // monthly: selectedListing.frequencyString === 'Monthly' ? true : false,
+    // weekly: selectedListing.frequencyString === 'Weekly' ? true : false,
+    // daily: selectedListing.frequencyString === 'Daily' ? true : false,
     // access: selectedListing.accessString,
-    daytime: '',
-    evening: '',
-    twentyfour: '',
+    frequency: selectedListing.frequencyString.toLowerCase(),
+    access: selectedListing.accessString.toLowerCase(),
     title: selectedListing.title,
     description: selectedListing.description,
     price: selectedListing.price,
@@ -44,9 +43,8 @@ export const UpdateListing = ({ step, selectedListing }) => {
     smallItems,
     rv,
     largeItems,
-    monthly,
-    weekly,
-    daily,
+    frequency,
+    access,
     // access: selectedListing.accessString,
     daytime,
     evening,
@@ -66,6 +64,20 @@ export const UpdateListing = ({ step, selectedListing }) => {
     setData({
       ...data,
       [e.target.name]: e.target.checked,
+    });
+  };
+
+  const handleFrequency = (e) => {
+    setData({
+      ...data,
+      frequency: e.target.value,
+    });
+  };
+
+  const handleAccess = (e) => {
+    setData({
+      ...data,
+      access: e.target.value,
     });
   };
 
@@ -166,6 +178,60 @@ export const UpdateListing = ({ step, selectedListing }) => {
             value='Large Items'
             checked={largeItems ? 'checked' : ''}
             onChange={(e) => handleCheck(e)}
+          />
+          Monthly
+          <input
+            className='form-control'
+            name='frequency'
+            type='radio'
+            value='monthly'
+            checked={frequency === 'monthly' ? 'checked' : ''}
+            onChange={(e) => handleFrequency(e)}
+          />
+          Weekly
+          <input
+            className='form-control'
+            name='frequency'
+            type='radio'
+            value='weekly'
+            checked={frequency === 'weekly' ? 'checked' : ''}
+            onChange={(e) => handleFrequency(e)}
+          />
+          Daily
+          <input
+            className='form-control'
+            name='frequency'
+            type='radio'
+            value='daily'
+            checked={frequency === 'daily' ? 'checked' : ''}
+            onChange={(e) => handleFrequency(e)}
+          />
+          Day Time
+          <input
+            className='form-control'
+            name='access'
+            type='radio'
+            value='daytime'
+            checked={access === 'daytime' ? 'checked' : ''}
+            onChange={(e) => handleAccess(e)}
+          />
+          Evening
+          <input
+            className='form-control'
+            name='access'
+            type='radio'
+            value='evening'
+            checked={access === 'evening' ? 'checked' : ''}
+            onChange={(e) => handleAccess(e)}
+          />
+          24/7
+          <input
+            className='form-control'
+            name='access'
+            type='radio'
+            value='24/7'
+            checked={access === '24/7' ? 'checked' : ''}
+            onChange={(e) => handleAccess(e)}
           />
         </div>
       )}
