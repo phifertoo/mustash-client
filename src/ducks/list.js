@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const initialState = {
-  currentStep: 0,
+  currentStep: 9,
   address: {
     street: '555 s flower',
     city: 'los angeles',
@@ -136,6 +136,10 @@ export const setProperty = (type, property) => (dispatch) => {
     dispatch({ type: 'SETPROPERTY_FAIL' });
   }
 };
+
+// export const setS3Images = () => (dispatch) => {
+//   worker.postMessage('Hello World');
+// };
 
 export const submitSpace = (data) => async (dispatch) => {
   const config = {

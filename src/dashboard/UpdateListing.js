@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { dashboardMap } from './dashboardMap';
@@ -10,7 +10,6 @@ export const UpdateListing = ({ step, selectedListing }) => {
     width: selectedListing.size.width,
     height: selectedListing.size.height,
     address: selectedListing.addressString,
-    // content: selectedListing.content.join(','),
     smallVehicles: selectedListing.content.some(
       (element) => element === 'Small Vehicles'
     ),
@@ -21,11 +20,6 @@ export const UpdateListing = ({ step, selectedListing }) => {
     largeItems: selectedListing.content.some(
       (element) => element === 'Large Items'
     ),
-    // frequency: selectedListing.frequencyString,
-    // monthly: selectedListing.frequencyString === 'Monthly' ? true : false,
-    // weekly: selectedListing.frequencyString === 'Weekly' ? true : false,
-    // daily: selectedListing.frequencyString === 'Daily' ? true : false,
-    // access: selectedListing.accessString,
     frequency: selectedListing.frequencyString.toLowerCase(),
     access: selectedListing.accessString.toLowerCase(),
     title: selectedListing.title,
@@ -45,10 +39,6 @@ export const UpdateListing = ({ step, selectedListing }) => {
     largeItems,
     frequency,
     access,
-    // access: selectedListing.accessString,
-    daytime,
-    evening,
-    twentyfour,
     description,
     price,
   } = data;
@@ -87,7 +77,7 @@ export const UpdateListing = ({ step, selectedListing }) => {
         <div className='form-group '>
           Type:
           <input
-            className='form-control'
+            className='form-control '
             name='title'
             type='text'
             placeholder={selectedListing.title}
@@ -211,7 +201,7 @@ export const UpdateListing = ({ step, selectedListing }) => {
             className='form-control'
             name='access'
             type='radio'
-            value='daytime'
+            value='daytime  '
             checked={access === 'daytime' ? 'checked' : ''}
             onChange={(e) => handleAccess(e)}
           />

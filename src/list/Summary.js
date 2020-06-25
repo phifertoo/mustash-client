@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { previousStep, setStep, submitSpace } from '../ducks/list';
 import { stepMap } from './stepMap';
-import Dashboard from '../dashboard/Dashboard';
+import worker from './worker';
 
 export const Summary = ({
   currentStep,
@@ -69,6 +69,20 @@ export const Summary = ({
   };
 
   useEffect(() => {});
+
+  //convert the web worker file into a "webpack-compatible" by turning the web worker file into a path/string which can be called as a URL.
+  const code = worker.toString();
+  const blob = new Blob(['(' + code + ')()']);
+  const myWorker = new Worker(URL.createObjectURL(blob));
+  //send a message to the web worker
+  myWorker.postMessage('Fetch Users');
+  // myWorker.addEventListener('message', (event) => {
+  //   console.log('hello from main script');
+  // });
+  //add an event listener in the main file to listen for messages from the web worker
+  myWorker.onmessage = function (e) {
+    console.log('Message received from worker', e);
+  };
 
   return (
     <Fragment>

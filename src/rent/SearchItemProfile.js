@@ -39,14 +39,12 @@ const SearchItemProfile = ({
               <a
                 key={index}
                 target='_blank'
+                rel='noopener noreferrer'
                 href={selectedResult.s3Images[element].url}
                 className='mr-3'
               >
                 {index !== 0 && (
-                  <img
-                    src={selectedResult.s3Images[element].url}
-                    alt='No picture'
-                  />
+                  <img src={selectedResult.s3Images[element].url} alt='' />
                 )}
               </a>
             ))}
@@ -88,7 +86,7 @@ const SearchItemProfile = ({
                       <img
                         className='card-img-top nearby-listing-card-image'
                         src={element.s3Images.image1.url}
-                        alt='Card image cap'
+                        alt=''
                       />
                     </div>
                     <div className='card-body'>

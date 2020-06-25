@@ -43,7 +43,7 @@ export const MyListings = ({
                   <img
                     className='card-img-top mylistings-card-image'
                     src={element.s3Images.image1.url}
-                    alt='Card image cap'
+                    alt=''
                   />
                   <div className='card-body'>
                     <h5 className='card-title'>{element.typeString}</h5>
@@ -51,6 +51,7 @@ export const MyListings = ({
                     <a
                       onClick={() => handleClick(1, element)}
                       className='btn btn-primary'
+                      href='!#'
                     >
                       Edit
                     </a>
