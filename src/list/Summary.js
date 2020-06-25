@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { previousStep, setStep, submitSpace } from '../ducks/list';
@@ -21,11 +21,14 @@ export const Summary = ({
   images,
   submitSpace,
 }) => {
-  const [error, setError] = useState(false);
-  const [success, setSuccess] = useState(false);
+  const [data, setData] = useState({
+    error: false,
+    success: false,
+    isSubmitted: true,
+  });
 
   const handleClick = () => {
-    const data = {
+    const input = {
       addressString,
       typeString,
       size,
@@ -38,13 +41,15 @@ export const Summary = ({
       images,
       token: localStorage.token,
     };
-    submitSpace(data).then((result) => {
-      if (result.error) {
-        setError(result.error);
-      } else {
-        setSuccess(true);
-      }
-    });
+    // submitSpace(data).then((result) => {
+    //   if (result.error) {
+    //     setError(result.error);
+    //   } else {
+    //     setSuccess(true);
+    //   }
+    // });
+
+    myWorker.postMessage([JSON.stringify(input)]);
   };
 
   const handleEdit = (step) => {
@@ -61,27 +66,24 @@ export const Summary = ({
   const addressString = `${address.street}, ${address.city}, ${address.state}, ${address.zip}`;
 
   const showSuccess = () => {
-    if (success) {
+    if (data.success) {
       return <h3 className='text-success'>Your space has been listed</h3>;
-    } else if (error) {
+    } else if (data.error) {
       return <h3 className='text-danger'>Error in listing your space</h3>;
     }
   };
-
-  useEffect(() => {});
-
-  //convert the web worker file into a "webpack-compatible" by turning the web worker file into a path/string which can be called as a URL.
+  /*convert the web worker file into a "webpack-compatible" file by turning the 
+  file into a path/string which can be called as a URL. */
   const code = worker.toString();
   const blob = new Blob(['(' + code + ')()']);
   const myWorker = new Worker(URL.createObjectURL(blob));
-  //send a message to the web worker
-  myWorker.postMessage('Fetch Users');
-  // myWorker.addEventListener('message', (event) => {
-  //   console.log('hello from main script');
-  // });
   //add an event listener in the main file to listen for messages from the web worker
-  myWorker.onmessage = function (e) {
+  myWorker.onmessage = (e) => {
     console.log('Message received from worker', e);
+    setData({
+      ...data,
+      success: true,
+    });
   };
 
   return (
