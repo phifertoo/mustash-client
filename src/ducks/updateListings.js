@@ -15,6 +15,10 @@ export default function (state = initialState, action) {
       return { ...state, step: payload };
     case 'SETSELECTEDLISTING_SUCCESS':
       return { ...state, selectedListing: payload };
+    case 'UPDATESPACE_SUCCESS':
+      return {
+        ...initialState,
+      };
     default:
       return state;
   }
@@ -48,5 +52,25 @@ export const setSelectedListing = (selectedListing) => async (dispatch) => {
     dispatch({ type: 'SETSELECTEDLISTING_SUCCESS', payload: selectedListing });
   } catch (err) {
     dispatch({ type: 'SETSELECTEDLISTING_FAIL' });
+  }
+};
+
+export const updateSpace = (data, _id, token) => async (dispatch) => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      'x-auth-token': token,
+    },
+  };
+  const body = data;
+  body._id = _id;
+
+  try {
+    const res = await axios.post('/api/listing/update', body, config);
+    dispatch({ type: 'UPDATESPACE_SUCCESS', payload: res.data });
+    return res;
+  } catch (err) {
+    dispatch({ type: 'UPDATESPACE_FAIL' });
+    console.log(err);
   }
 };

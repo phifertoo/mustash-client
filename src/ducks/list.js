@@ -14,7 +14,7 @@ const initialState = {
     width: 0,
     height: 0,
   },
-  content: ['large'],
+  content: ['smallItems'],
   frequency: 'daily',
   access: '24/7',
   price: 200,
@@ -99,6 +99,10 @@ export default function (state = initialState, action) {
       return {
         ...state,
         currentStep: payload,
+      };
+    case 'SUBMITSPACE_SUCCESS':
+      return {
+        initialState,
       };
     default:
       return state;

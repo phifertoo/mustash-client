@@ -5,13 +5,6 @@ export default () => {
     // console.log('Posting message back to main script');
 
     const submitSpace = async (data) => {
-      const config = {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          'x-auth-token': data.token,
-        },
-      };
-
       const body = new FormData();
 
       Object.keys(data).forEach((element) => {

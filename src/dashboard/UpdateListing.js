@@ -2,14 +2,15 @@ import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { dashboardMap } from './dashboardMap';
+import { updateSpace } from '../ducks/updateListings';
 
-export const UpdateListing = ({ step, selectedListing }) => {
+export const UpdateListing = ({ step, selectedListing, updateSpace, jwt }) => {
   const [data, setData] = useState({
-    type: selectedListing.typeString,
+    typeString: selectedListing.typeString,
     length: selectedListing.size.length,
     width: selectedListing.size.width,
     height: selectedListing.size.height,
-    address: selectedListing.addressString,
+    addressString: selectedListing.addressString,
     smallVehicles: selectedListing.content.some(
       (element) => element === 'Small Vehicles'
     ),
@@ -20,8 +21,8 @@ export const UpdateListing = ({ step, selectedListing }) => {
     largeItems: selectedListing.content.some(
       (element) => element === 'Large Items'
     ),
-    frequency: selectedListing.frequencyString.toLowerCase(),
-    access: selectedListing.accessString.toLowerCase(),
+    frequencyString: selectedListing.frequencyString.toLowerCase(),
+    accessString: selectedListing.accessString.toLowerCase(),
     title: selectedListing.title,
     description: selectedListing.description,
     price: selectedListing.price,
@@ -29,17 +30,17 @@ export const UpdateListing = ({ step, selectedListing }) => {
 
   const {
     title,
-    type,
+    typeString,
     length,
     width,
     height,
-    address,
+    addressString,
     smallVehicles,
     smallItems,
     rv,
     largeItems,
-    frequency,
-    access,
+    frequencyString,
+    accessString,
     description,
     price,
   } = data;
@@ -58,25 +59,29 @@ export const UpdateListing = ({ step, selectedListing }) => {
     });
   };
 
-  const handleFrequency = (e) => {
-    setData({
-      ...data,
-      frequency: e.target.value,
-    });
-  };
-
-  const handleAccess = (e) => {
-    setData({
-      ...data,
-      access: e.target.value,
-    });
-  };
-
   const handleSelect = (e) => {
     setData({
       ...data,
       type: e.target.value,
     });
+  };
+
+  const handleSubmit = (input, token) => {
+    const content = [];
+    const contentMap = {
+      smallItems: 'Small Items',
+      smallVehicles: 'Small Vehicles',
+      rv: "RV's",
+      largeItems: 'Large Items',
+    };
+    Object.keys(contentMap).forEach((element) => {
+      if (data[element]) {
+        content.push(contentMap[element]);
+      }
+    });
+    const id = selectedListing._id;
+    input.content = content;
+    updateSpace(input, id, token);
   };
 
   return (
@@ -85,6 +90,7 @@ export const UpdateListing = ({ step, selectedListing }) => {
         <div className='form-group updateListings-container'>
           <div className='updateListings-inner-container'>
             <div className='updateListings-inner-left-container'>
+              <h4>Title:</h4>
               <h4>Type:</h4>
               <h4>L x W x H:</h4>
               <h4>Address:</h4>
@@ -96,17 +102,26 @@ export const UpdateListing = ({ step, selectedListing }) => {
             </div>
             <div className='updateListings-inner-right-container'>
               <div className='updateListings-property-container'>
+                <input
+                  className='form-control'
+                  name='title'
+                  type='text'
+                  placeholder={title}
+                  value={title}
+                  onChange={(e) => handleChange(e)}
+                />
+              </div>
+              <div className='updateListings-property-container'>
                 <select
                   className='custom-select-sm updateListings-select'
                   onChange={(e) => handleSelect(e)}
                 >
-                  <option>{data.type}</option>
+                  <option>{typeString}</option>
                   <option value='bedroom'>Bedroom</option>
                   <option value='basement'>Basement</option>
                   <option value='garage'>Garage</option>
                   <option value='warehouse'>Warehouse</option>
                   <option value='lot'>Lot</option>
-                  <option value='rv'>RV</option>
                   <option value='attic'>Attic</option>
                 </select>
               </div>
@@ -150,10 +165,10 @@ export const UpdateListing = ({ step, selectedListing }) => {
               <div className='updateListings-property-container'>
                 <input
                   className='form-control'
-                  name='address'
+                  name='addressString'
                   type='text'
-                  placeholder={selectedListing.address}
-                  value={address}
+                  placeholder={selectedListing.addressString}
+                  value={addressString}
                   onChange={(e) => handleChange(e)}
                 />
               </div>
@@ -217,33 +232,33 @@ export const UpdateListing = ({ step, selectedListing }) => {
                 <div className='updateListings-frequency'>
                   <input
                     className='custom-radio updateListings-radio'
-                    name='frequency'
+                    name='frequencyString'
                     type='radio'
                     value='monthly'
-                    checked={frequency === 'monthly' ? 'checked' : ''}
-                    onChange={(e) => handleFrequency(e)}
+                    checked={frequencyString === 'monthly' ? 'checked' : ''}
+                    onChange={(e) => handleChange(e)}
                   />
                   <h4>Monthly</h4>
                 </div>
                 <div className='updateListings-frequency'>
                   <input
                     className='custom-radio updateListings-radio'
-                    name='frequency'
+                    name='frequencyString'
                     type='radio'
                     value='weekly'
-                    checked={frequency === 'weekly' ? 'checked' : ''}
-                    onChange={(e) => handleFrequency(e)}
+                    checked={frequencyString === 'weekly' ? 'checked' : ''}
+                    onChange={(e) => handleChange(e)}
                   />
                   <h4>Weekly</h4>
                 </div>
                 <div className='updateListings-frequency'>
                   <input
                     className='custom-radio updateListings-radio'
-                    name='frequency'
+                    name='frequencyString'
                     type='radio'
                     value='daily'
-                    checked={frequency === 'daily' ? 'checked' : ''}
-                    onChange={(e) => handleFrequency(e)}
+                    checked={frequencyString === 'daily' ? 'checked' : ''}
+                    onChange={(e) => handleChange(e)}
                   />
                   <h4>Daily</h4>
                 </div>
@@ -252,33 +267,33 @@ export const UpdateListing = ({ step, selectedListing }) => {
                 <div className='updateListings-hours'>
                   <input
                     className='custom-radio updateListings-radio'
-                    name='access'
+                    name='accessString'
                     type='radio'
                     value='daytime'
-                    checked={access === 'daytime' ? 'checked' : ''}
-                    onChange={(e) => handleAccess(e)}
+                    checked={accessString === 'daytime' ? 'checked' : ''}
+                    onChange={(e) => handleChange(e)}
                   />
                   <h4>Day Time</h4>
                 </div>
                 <div className='updateListings-hours'>
                   <input
                     className='custom-radio updateListings-radio'
-                    name='access'
+                    name='accessString'
                     type='radio'
                     value='evening'
-                    checked={access === 'evening' ? 'checked' : ''}
-                    onChange={(e) => handleAccess(e)}
+                    checked={accessString === 'evening' ? 'checked' : ''}
+                    onChange={(e) => handleChange(e)}
                   />
                   <h4>Evening</h4>
                 </div>
                 <div className='updateListings-hours'>
                   <input
                     className='custom-radio updateListings-radio'
-                    name='access'
+                    name='accessString'
                     type='radio'
                     value='24/7'
-                    checked={access === '24/7' ? 'checked' : ''}
-                    onChange={(e) => handleAccess(e)}
+                    checked={accessString === '24/7' ? 'checked' : ''}
+                    onChange={(e) => handleChange(e)}
                   />
                   <h4>24/7</h4>
                 </div>
@@ -292,7 +307,10 @@ export const UpdateListing = ({ step, selectedListing }) => {
                   onChange={(e) => handleChange(e)}
                 />
               </div>
-              <button className='btn btn-primary updateListing-button'>
+              <button
+                className='btn btn-primary updateListing-button'
+                onClick={() => handleSubmit(data, jwt)}
+              >
                 Update
               </button>
             </div>
@@ -306,11 +324,14 @@ export const UpdateListing = ({ step, selectedListing }) => {
 UpdateListing.propTypes = {
   step: PropTypes.number.isRequired,
   selectedListing: PropTypes.object.isRequired,
+  updateSpace: PropTypes.func.isRequired,
+  jwt: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   step: state.updateListings.step,
   selectedListing: state.updateListings.selectedListing,
+  jwt: state.auth.token,
 });
 
-export default connect(mapStateToProps, {})(UpdateListing);
+export default connect(mapStateToProps, { updateSpace })(UpdateListing);
