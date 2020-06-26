@@ -20,8 +20,6 @@ export default () => {
         }
       });
 
-      console.log(body);
-
       const images = data.images;
       /* when creating multiple blobs using an async function inside of the map method and you need to wait
        until all the async functions finish using "await Promise.all()" */
@@ -49,6 +47,8 @@ export default () => {
           },
           body: body,
         });
+        //send a message back to the component that the object was successfully posted to the backend
+
         postMessage(JSON.stringify(res));
       } catch (err) {
         console.log(err);

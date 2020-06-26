@@ -2,9 +2,13 @@ import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 
 const initialState = {
-  token: localStorage.getItem('token'),
-  isAuthenticated: false,
-  user: null,
+  // token: localStorage.getItem('token'),
+  // isAuthenticated: false,
+  // user: null,
+  token:
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXIiOiI1ZWJlNGE1ZjQ0YjBlYzJjZTg0Mjk0YzIifSwiaWF0IjoxNTkzMTI0NDY5LCJleHAiOjE1OTMyMjQ0Njl9.ItaBftgbch6GaTF3KJiwdItGs9DxJEnxffIJ3x7YhVw',
+  isAuthenticated: true,
+  user: '5ebe4a5f44b0ec2ce84294c2',
 };
 
 export default function (state = initialState, action) {

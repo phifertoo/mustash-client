@@ -51,7 +51,6 @@ export const MyListings = ({
                     <a
                       onClick={() => handleClick(1, element)}
                       className='btn btn-primary'
-                      href='!#'
                     >
                       Edit
                     </a>
