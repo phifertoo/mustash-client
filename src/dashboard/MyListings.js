@@ -36,24 +36,28 @@ export const MyListings = ({
           <div className='mylistings-inner-container'>
             {sellerListings.length > 0 ? (
               sellerListings.map((element, index) => (
-                <div
-                  className='card mylistings-card-container col-3'
-                  key={index}
-                >
+                <div className='card mylistings-card-container' key={index}>
                   <img
                     className='card-img-top mylistings-card-image'
-                    src={element.s3Images.image1.url}
+                    src={element.imageArray[0].url}
                     alt=''
                   />
+
                   <div className='card-body'>
                     <h5 className='card-title'>{element.typeString}</h5>
                     <p className='card-text'>{element.addressString}</p>
-                    <a
+                    <button
                       onClick={() => handleClick(1, element)}
-                      className='btn btn-primary'
+                      className='btn btn-primary mr-3'
                     >
                       Edit
-                    </a>
+                    </button>
+                    <button
+                      onClick={() => handleClick(6, element)}
+                      className='btn btn-primary'
+                    >
+                      Images
+                    </button>
                   </div>
                 </div>
               ))

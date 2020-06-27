@@ -28,13 +28,13 @@ export const Images = ({
       //create an image url so you don't have to store the image in the state/redux
       const imageURL = window.URL.createObjectURL(e.target.files[0]);
       // let testblob = await fetch(imageURL).then((r) => r.blob());
-      // console.log(testblob);
       setData({
         ...data,
         [e.target.name]: imageURL,
       });
     } else {
-      //if the pictures are greater than 1MB, the input value needs to be set to an empty string.
+      /*if the pictures are greater than 1MB, the input value needs to be set to an empty string so that it doesn't
+      look like the picture was uploaded */
       e.target.value = '';
       alert('Pictures must be less than 3MB');
     }

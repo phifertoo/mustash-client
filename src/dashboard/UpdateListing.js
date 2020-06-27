@@ -1,31 +1,50 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { dashboardMap } from './dashboardMap';
 import { updateSpace } from '../ducks/updateListings';
 
 export const UpdateListing = ({ step, selectedListing, updateSpace, jwt }) => {
+  useEffect(() => {
+    setData({
+      typeString: selectedListing.typeString,
+      length: selectedListing.size.length,
+      width: selectedListing.size.width,
+      height: selectedListing.size.height,
+      addressString: selectedListing.addressString,
+      smallVehicles: selectedListing.content.some(
+        (element) => element === 'Small Vehicles'
+      ),
+      smallItems: selectedListing.content.some(
+        (element) => element === 'Small Items'
+      ),
+      rv: selectedListing.content.some((element) => element === "RV's"),
+      largeItems: selectedListing.content.some(
+        (element) => element === 'Large Items'
+      ),
+      frequencyString: selectedListing.frequencyString.toLowerCase(),
+      accessString: selectedListing.accessString.toLowerCase(),
+      title: selectedListing.title,
+      description: selectedListing.description,
+      price: selectedListing.price,
+    });
+  }, [step, selectedListing]);
+
   const [data, setData] = useState({
-    typeString: selectedListing.typeString,
-    length: selectedListing.size.length,
-    width: selectedListing.size.width,
-    height: selectedListing.size.height,
-    addressString: selectedListing.addressString,
-    smallVehicles: selectedListing.content.some(
-      (element) => element === 'Small Vehicles'
-    ),
-    smallItems: selectedListing.content.some(
-      (element) => element === 'Small Items'
-    ),
-    rv: selectedListing.content.some((element) => element === "RV's"),
-    largeItems: selectedListing.content.some(
-      (element) => element === 'Large Items'
-    ),
-    frequencyString: selectedListing.frequencyString.toLowerCase(),
-    accessString: selectedListing.accessString.toLowerCase(),
-    title: selectedListing.title,
-    description: selectedListing.description,
-    price: selectedListing.price,
+    typeString: '',
+    length: 0,
+    width: 0,
+    height: 0,
+    addressString: '',
+    smallVehicles: false,
+    smallItems: false,
+    rv: false,
+    largeItems: false,
+    frequencyString: '',
+    accessString: '',
+    title: '',
+    description: '',
+    price: 0,
   });
 
   const {

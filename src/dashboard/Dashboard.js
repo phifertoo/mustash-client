@@ -4,6 +4,7 @@ import Navbar from '../layout/Navbar';
 import MyListings from './MyListings';
 import UpdateListing from './UpdateListing';
 import PropTypes from 'prop-types';
+import UpdateImages from './UpdateImages';
 
 export const Dashboard = ({ selectedListing, isAuthenticated }) => {
   const categories = ['My Listings', 'My Rentals', 'Inbox', 'Profile'];
@@ -22,6 +23,7 @@ export const Dashboard = ({ selectedListing, isAuthenticated }) => {
           </div>
           {isAuthenticated && <MyListings />}
           {Object.keys(selectedListing).length > 0 && <UpdateListing />}
+          {Object.keys(selectedListing).length > 0 && <UpdateImages />}
         </div>
       </div>
     </Fragment>

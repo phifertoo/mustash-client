@@ -67,10 +67,32 @@ export const updateSpace = (data, _id, token) => async (dispatch) => {
 
   try {
     const res = await axios.post('/api/listing/update', body, config);
-    dispatch({ type: 'UPDATESPACE_SUCCESS', payload: res.data });
+    dispatch({ type: 'UPDATESPACE_SUCCESS' });
     return res;
   } catch (err) {
     dispatch({ type: 'UPDATESPACE_FAIL' });
+    console.log(err);
+  }
+};
+
+export const deleteImage = (data) => async (dispatch) => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      'x-auth-token': data.token,
+    },
+    data: {
+      name: data.image.name,
+      _id: data._id,
+    },
+  };
+
+  try {
+    const res = await axios.delete('/api/listing/image', config);
+    dispatch({ type: 'DELETEIMAGE_SUCCESS' });
+    return res;
+  } catch (err) {
+    dispatch({ type: 'DELETEIMAGE_FAIL' });
     console.log(err);
   }
 };

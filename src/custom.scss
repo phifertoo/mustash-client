@@ -595,14 +595,16 @@ $body-bg: white;
 }
 
 .mylistings-inner-container {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 10px;
 }
 
 .mylistings-card-container {
   width: 250px;
   height: 450px;
   border: 2px solid #dcdcdc;
-  margin-right: 10px;
+  margin-bottom: 10px;
 }
 
 .mylistings-card-image {
@@ -704,10 +706,50 @@ $body-bg: white;
   position: relative;
   margin-top: 250px;
 }
+
+// _________________________________________________Update Images_________________________________________________________________________
+
+.updateImages-parent-container {
+  width: 100%;
+}
+
+.updateImages-top-container {
+  height: 40%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.updateImages-image-container {
+  width: 1fr;
+  height: 350px;
+  border: 2px solid #dcdcdc;
+  margin-right: 30px;
+}
+
+.updateImages-bottom-container {
+  display: flex;
+}
+
+.updateImage-input-image {
+  width: 50% !important;
+  height: 40px !important;
+  margin-bottom: 10px;
+}
+
+.updateImages-bottom-inner-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 0 20px 0 20px;
+  flex-wrap: wrap;
+}
+
 // _________________________________________________Media Queries_________________________________________________________________________
 
 .dashboard-sidebar {
-  height: 100%;
+  height: 1200px;
   width: 200px;
   position: relative;
   z-index: 1;

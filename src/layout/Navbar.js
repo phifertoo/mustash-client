@@ -4,8 +4,9 @@ import { connect } from 'react-redux';
 import logo from '../assets/mustashlogo.png';
 import { logout } from '../ducks/auth';
 import PropTypes from 'prop-types';
+import { setDashboardStep } from '../ducks/updateListings';
 
-export const Navbar = ({ isAuthenticated, logout }) => {
+export const Navbar = ({ isAuthenticated, logout, setDashboardStep }) => {
   const handleClick = () => {
     logout();
   };
@@ -46,7 +47,11 @@ export const Navbar = ({ isAuthenticated, logout }) => {
         </li>
         <li className='nav-item active'>
           {isAuthenticated && (
-            <Link to='/dashboard' className='nav-link mt-2'>
+            <Link
+              to='/dashboard'
+              onClick={() => setDashboardStep(0)}
+              className='nav-link mt-2'
+            >
               Dashboard
             </Link>
           )}
@@ -58,10 +63,11 @@ export const Navbar = ({ isAuthenticated, logout }) => {
 Navbar.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
   logout: PropTypes.func.isRequired,
+  setDashboardStep: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
 });
 
-export default connect(mapStateToProps, { logout })(Navbar);
+export default connect(mapStateToProps, { logout, setDashboardStep })(Navbar);
