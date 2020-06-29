@@ -2,19 +2,20 @@ import React, { Fragment, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { dashboardMap } from './dashboardMap';
-import { deleteImage } from '../ducks/updateListings';
+import { deleteImage, resetSelectedListing } from '../ducks/updateListings';
+import worker from './worker';
 
-export const UpdateImage = ({ step, selectedListing, token, deleteImage }) => {
-  useEffect(() => {
-    setData({
-      ...data,
-      imageArray: selectedListing.imageArray,
-    });
-  }, [step]);
-
+export const UpdateImage = ({
+  step,
+  selectedListing,
+  token,
+  deleteImage,
+  resetSelectedListing,
+}) => {
   const [data, setData] = useState({
     imageArray: selectedListing.imageArray,
     newImageArray: [],
+    success: false,
   });
 
   const { imageArray, newImageArray } = data;
@@ -40,14 +41,34 @@ export const UpdateImage = ({ step, selectedListing, token, deleteImage }) => {
     }
   };
 
-  const onDelete = (data, index) => {
-    imageArray.splice(index, 1);
+  const handleDelete = async (inputObject, index) => {
+    await deleteImage(inputObject, index);
+    await resetSelectedListing(inputObject);
+  };
+
+  const handleUpload = (inputObject, images) => {
+    inputObject.imageArray = images;
+    myWorker.postMessage([inputObject]);
+  };
+
+  const code = worker.toString();
+  const blob = new Blob(['(' + code + ')()']);
+  const myWorker = new Worker(URL.createObjectURL(blob));
+  //add an event listener in the main file to listen for messages from the web worker
+  myWorker.onmessage = (e) => {
     setData({
       ...data,
-      imageArray,
+      success: true,
     });
-    deleteImage(data, index);
+    resetSelectedListing(input);
   };
+
+  useEffect(() => {
+    setData({
+      ...data,
+      imageArray: selectedListing.imageArray,
+    });
+  }, [step, selectedListing]);
 
   return (
     <Fragment>
@@ -67,7 +88,12 @@ export const UpdateImage = ({ step, selectedListing, token, deleteImage }) => {
                   onChange={(e) => handleChange(e)}
                 />
               ))}
-            <button className='btn btn-primary'>Upload</button>
+            <button
+              className='btn btn-primary'
+              onClick={() => handleUpload(input, newImageArray)}
+            >
+              Upload
+            </button>
           </div>
 
           <hr />
@@ -78,13 +104,17 @@ export const UpdateImage = ({ step, selectedListing, token, deleteImage }) => {
                   className='card updateImages-image-container mb-5'
                   key={index}
                 >
-                  <img src={imageArray[index].url} className='figure-img' />
+                  <img
+                    src={imageArray[index].url}
+                    alt=''
+                    className='figure-img'
+                  />
 
                   <div className='card-body'>
                     <button
                       onClick={() => {
                         input.image = imageArray[index];
-                        onDelete(input, index);
+                        handleDelete(input, index);
                       }}
                       className='btn btn-danger mr-3'
                     >
@@ -106,6 +136,7 @@ UpdateImage.propTypes = {
   selectedListing: PropTypes.object.isRequired,
   token: PropTypes.string.isRequired,
   deleteImage: PropTypes.func.isRequired,
+  resetSelectedListing: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -114,4 +145,6 @@ const mapStateToProps = (state) => ({
   token: state.auth.token,
 });
 
-export default connect(mapStateToProps, { deleteImage })(UpdateImage);
+export default connect(mapStateToProps, { deleteImage, resetSelectedListing })(
+  UpdateImage
+);

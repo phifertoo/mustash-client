@@ -79,7 +79,6 @@ export const Summary = ({
   const myWorker = new Worker(URL.createObjectURL(blob));
   //add an event listener in the main file to listen for messages from the web worker
   myWorker.onmessage = (e) => {
-    console.log('Message received from worker', e);
     setData({
       ...data,
       success: true,

@@ -14,6 +14,7 @@ export default function (state = initialState, action) {
     case 'SETDASHBOARDSTEP_SUCCESS':
       return { ...state, step: payload };
     case 'SETSELECTEDLISTING_SUCCESS':
+    case 'RESETSELECTEDLISTING_SUCCESS':
       return { ...state, selectedListing: payload };
     case 'UPDATESPACE_SUCCESS':
       return {
@@ -32,7 +33,10 @@ export const findSellerListings = (input) => async (dispatch) => {
     },
   };
   try {
-    const res = await axios.get(`/api/listing/${input.seller_id}`, config);
+    const res = await axios.get(
+      `/api/listing/seller/${input.seller_id}`,
+      config
+    );
     dispatch({ type: 'FINDSELLERLISTINGS_SUCCESS', payload: res.data });
   } catch (err) {
     console.log(err);
@@ -93,6 +97,23 @@ export const deleteImage = (data) => async (dispatch) => {
     return res;
   } catch (err) {
     dispatch({ type: 'DELETEIMAGE_FAIL' });
+    console.log(err);
+  }
+};
+
+export const resetSelectedListing = (input) => async (dispatch) => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      'x-auth-token': input.token,
+    },
+  };
+  try {
+    const res = await axios.get(`/api/listing/${input._id}`, config);
+    dispatch({ type: 'RESETSELECTEDLISTING_SUCCESS', payload: res.data });
+  } catch (err) {
+    dispatch({ type: 'RESETSELECTEDLISTING_FAIL' });
+
     console.log(err);
   }
 };
