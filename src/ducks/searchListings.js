@@ -45,6 +45,7 @@ export default function (state = initialState, action) {
         selectedResult: {},
         nearbyListings: {},
       };
+    case 'RESERVESPACE_SUCCESS':
     default:
       return state;
   }
@@ -120,5 +121,23 @@ export const clearSelectedResult = () => async (dispatch) => {
     dispatch({ type: 'CLEARSELECTEDRESULT_SUCCESS' });
   } catch (err) {
     dispatch({ type: 'CLEARSELECTEDRESULT_FAIL' });
+  }
+};
+
+export const reserveSpace = (listing_id, token) => async (dispatch) => {
+  try {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        'x-auth-token': token,
+      },
+    };
+    const body = {
+      listing_id,
+    };
+    await axios.post('/api/reserve', body, config);
+    dispatch({ type: 'RESERVESPACE_SUCCESS' });
+  } catch (err) {
+    dispatch({ type: 'RESERVESPACE_FAIL' });
   }
 };

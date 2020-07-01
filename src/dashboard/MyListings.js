@@ -47,7 +47,7 @@ export const MyListings = ({
                     <h5 className='card-title'>{element.typeString}</h5>
                     <p className='card-text'>{element.addressString}</p>
                     <button
-                      onClick={() => handleClick(1, element)}
+                      onClick={() => handleClick(4, element)}
                       className='btn btn-primary mr-3'
                     >
                       Edit

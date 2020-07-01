@@ -59,8 +59,6 @@ export const SearchResults = ({
     }
   };
 
-  console.log(searchListings);
-
   return (
     <Fragment>
       <div>

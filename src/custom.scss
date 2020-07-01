@@ -483,6 +483,11 @@ $body-bg: white;
   border: 2px solid transparent;
 }
 
+.dashboard-categories:hover {
+  cursor: pointer;
+  color: red;
+}
+
 .sidenav-stage-uncompleted {
   @extend .sidenav-stage-completed;
   color: #ccccb3;

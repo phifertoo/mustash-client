@@ -38,10 +38,10 @@ const SearchItem = ({ searchItem, getImages, index, selectResult }) => {
     <div className='card mb-3'>
       <div className='row no-gutters'>
         <div className='col-md-2'>
-          {searchItem.s3Images && (
+          {searchItem.imageArray.length > 0 && (
             <img
               // src={`data:image/png;base64,${data.encodedImage}`}
-              src={searchItem.s3Images.image1.url}
+              src={searchItem.imageArray[0].url}
               className='card-img-left'
               alt='not working'
             ></img>

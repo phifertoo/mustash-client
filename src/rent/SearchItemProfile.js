@@ -1,13 +1,19 @@
 import React, { Fragment, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { findNearListings, selectResult } from '../ducks/searchListings';
+import {
+  findNearListings,
+  selectResult,
+  reserveSpace,
+} from '../ducks/searchListings';
 
 const SearchItemProfile = ({
   findNearListings,
   nearbyListings,
   selectedResult,
   selectResult,
+  reserveSpace,
+  token,
 }) => {
   const nearbyListingsArray = nearbyListings.locations;
 
@@ -21,6 +27,10 @@ const SearchItemProfile = ({
     selectResult(selectedResult);
   };
 
+  const handleReserve = (listing_id, token) => {
+    reserveSpace(listing_id, token);
+  };
+
   return (
     <Fragment>
       {selectedResult && (
@@ -28,23 +38,23 @@ const SearchItemProfile = ({
           <div className='search-item-profile-main-image-container '>
             {selectedResult && (
               <img
-                src={selectedResult.s3Images.image1.url}
+                src={selectedResult.imageArray[0].url}
                 className='search-item-profile-main-image'
                 alt=''
               />
             )}
           </div>
           <div className='image-thumbnails-container'>
-            {Object.keys(selectedResult.s3Images).map((element, index) => (
+            {selectedResult.imageArray.map((element, index) => (
               <a
                 key={index}
                 target='_blank'
                 rel='noopener noreferrer'
-                href={selectedResult.s3Images[element].url}
+                href={selectedResult.imageArray[index].url}
                 className='mr-3'
               >
                 {index !== 0 && (
-                  <img src={selectedResult.s3Images[element].url} alt='' />
+                  <img src={selectedResult.imageArray[index].url} alt='' />
                 )}
               </a>
             ))}
@@ -54,7 +64,12 @@ const SearchItemProfile = ({
             <h4>{selectedResult.addressString}</h4>
 
             <div className='search-item-profile-button-container'>
-              <button className='btn-lg btn-danger mb-3'>Reserve Now</button>
+              <button
+                onClick={() => handleReserve(selectedResult._id, token)}
+                className='btn-lg btn-danger mb-3'
+              >
+                Reserve Now
+              </button>
             </div>
             <hr />
 
@@ -85,7 +100,7 @@ const SearchItemProfile = ({
                     <div className='nearby-listing-card-image-container '>
                       <img
                         className='card-img-top nearby-listing-card-image'
-                        src={element.s3Images.image1.url}
+                        src={element.imageArray[0].url}
                         alt=''
                       />
                     </div>
@@ -117,6 +132,8 @@ SearchItemProfile.propTypes = {
   nearbyListings: PropTypes.object.isRequired,
   selectedResult: PropTypes.object.isRequired,
   selectResult: PropTypes.func.isRequired,
+  reserveSpace: PropTypes.func.isRequired,
+  token: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -124,9 +141,11 @@ const mapStateToProps = (state) => ({
   searchResults: state.searchListings.searchResults,
   nearbyListings: state.searchListings.nearbyListings,
   selectedResult: state.searchListings.selectedResult,
+  token: state.auth.token,
 });
 
 export default connect(mapStateToProps, {
   findNearListings,
   selectResult,
+  reserveSpace,
 })(SearchItemProfile);

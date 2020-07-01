@@ -15,7 +15,6 @@ export const UpdateImage = ({
   const [data, setData] = useState({
     imageArray: selectedListing.imageArray,
     newImageArray: [],
-    success: false,
   });
 
   const { imageArray, newImageArray } = data;
@@ -56,10 +55,6 @@ export const UpdateImage = ({
   const myWorker = new Worker(URL.createObjectURL(blob));
   //add an event listener in the main file to listen for messages from the web worker
   myWorker.onmessage = (e) => {
-    setData({
-      ...data,
-      success: true,
-    });
     resetSelectedListing(input);
   };
 
