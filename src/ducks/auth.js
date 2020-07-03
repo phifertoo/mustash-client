@@ -6,7 +6,7 @@ const initialState = {
   // isAuthenticated: false,
   // user: null,
   token:
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXIiOiI1ZWJlNGE1ZjQ0YjBlYzJjZTg0Mjk0YzIifSwiaWF0IjoxNTkzNTQ0NDg0LCJleHAiOjE1OTM2NDQ0ODR9.gd0jayXDWXV666fRfRmKqYNCKgCR4c-pB967RSGCtjo',
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXIiOiI1ZWJlNGE1ZjQ0YjBlYzJjZTg0Mjk0YzIifSwiaWF0IjoxNTkzODEzNjE2LCJleHAiOjE1OTM5MTM2MTZ9.uvbRJsKdf2l_lcmJ9QK5B5i1Wp_ZHdG9mXJ_p6tRpCk',
   isAuthenticated: true,
   user: '5ebe4a5f44b0ec2ce84294c2',
 };

@@ -6,4 +6,5 @@ export const dashboardMap = {
   4: 'updateListing',
   5: 'updateProfile',
   6: 'updateImages',
+  7: 'fullProfile',
 };

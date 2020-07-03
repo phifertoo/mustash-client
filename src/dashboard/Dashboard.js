@@ -6,11 +6,14 @@ import UpdateListing from './UpdateListing';
 import PropTypes from 'prop-types';
 import UpdateImages from './UpdateImages';
 import { setDashboardStep } from '../ducks/updateListings';
+import MyRentals from './MyRentals';
+import FullProfile from './FullProfile';
 
 export const Dashboard = ({
   selectedListing,
   isAuthenticated,
   setDashboardStep,
+  selectedRental,
 }) => {
   const categories = ['My Listings', 'My Rentals', 'Inbox', 'Profile'];
 
@@ -36,6 +39,8 @@ export const Dashboard = ({
             ))}
           </div>
           {isAuthenticated && <MyListings />}
+          {isAuthenticated && <MyRentals />}
+          {Object.keys(selectedRental).length > 0 && <FullProfile />}
           {Object.keys(selectedListing).length > 0 && <UpdateListing />}
           {Object.keys(selectedListing).length > 0 && <UpdateImages />}
         </div>
@@ -48,10 +53,12 @@ Dashboard.propTypes = {
   selectedListing: PropTypes.object.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
   setDashboardStep: PropTypes.func.isRequired,
+  selectedRental: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   selectedListing: state.updateListings.selectedListing,
+  selectedRental: state.rentals.selectedRental,
   isAuthenticated: state.auth.isAuthenticated,
 });
 

@@ -50,11 +50,23 @@ export const SearchResults = ({
   });
 
   const showSearchResults = () => {
-    if (searchResults.length > 0) {
+    if (
+      searchResults.length > 0 &&
+      !searchResults.every((element) => element.renter)
+    ) {
+      console.log('fail');
+      // console.log(searchResults.every((element) => element.renter));
+
       return searchResults.map((element, index) => (
-        <SearchItem key={index} index={index} searchItem={element} />
+        <div key={index}>
+          {element.renter === '' && (
+            <SearchItem key={index} index={index} searchItem={element} />
+          )}
+        </div>
       ));
     } else {
+      console.log('pass');
+
       return <h4>No results found...</h4>;
     }
   };

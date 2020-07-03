@@ -21,7 +21,7 @@ function App() {
             <Route exact path='/register' component={Register} />
             <Route exact path='/searchresults' component={SearchResults} />
             <PrivateRoute exact path='/getstarted' component={ListSpace} />
-            <Route exact path='/dashboard' component={Dashboard} />
+            <PrivateRoute exact path='/dashboard' component={Dashboard} />
           </Switch>
         </Fragment>
       </Router>
