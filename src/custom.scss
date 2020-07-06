@@ -763,6 +763,32 @@ $body-bg: white;
   margin-bottom: 10px;
 }
 
+.myrentals-profile-container {
+  width: 100%;
+}
+
+.myrentals-comment-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.myrentals-comment-inner-container {
+  // border: 2px solid #0275d8;
+  width: 80%;
+  // display: flex;
+  // justify-content: center;
+}
+
+.myrentals-textarea {
+  width: 100%;
+}
+
+.myrentals-comment-title {
+  text-align: center;
+  color: white;
+}
+
 // _________________________________________________Media Queries_________________________________________________________________________
 
 .dashboard-sidebar {

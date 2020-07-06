@@ -12,6 +12,7 @@ export default function (state = initialState, action) {
       return { ...state, myRentals: payload };
     case 'SETSELECTEDRENTAL_SUCCESS':
       return { ...state, selectedRental: payload };
+    case 'ADDCOMMENT_SUCCESS':
     default:
       return state;
   }
@@ -41,5 +42,25 @@ export const setSelectedRental = (selectedRental) => async (dispatch) => {
     dispatch({ type: 'SETSELECTEDRENTAL_SUCCESS', payload: selectedRental });
   } catch (err) {
     dispatch({ type: 'SETSELECTEDRENTAL_FAIL' });
+  }
+};
+
+export const addComment = (input) => async (dispatch) => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      'x-auth-token': input.token,
+    },
+  };
+  const body = {
+    comment: input.comment,
+  };
+  try {
+    await axios.post(`/api/comments/${input.listing_id}`, body, config);
+    dispatch({ type: 'ADDCOMMENT_SUCCESS' });
+  } catch (err) {
+    console.log(err);
+
+    dispatch({ type: 'ADDCOMMENT_FAIL' });
   }
 };

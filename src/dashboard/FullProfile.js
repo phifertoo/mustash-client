@@ -1,16 +1,17 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { findNearListings, selectResult } from '../ducks/searchListings';
 import { dashboardMap } from './dashboardMap';
-import { setSelectedRental } from '../ducks/rentals';
+import { setSelectedRental, addComment } from '../ducks/rentals';
 
 const SearchItemProfile = ({
   findNearListings,
   nearbyListings,
   selectedRental,
-
+  addComment,
   step,
+  token,
 }) => {
   useEffect(() => {
     if (selectedRental) {
@@ -18,14 +19,61 @@ const SearchItemProfile = ({
     }
   }, [findNearListings, selectedRental]);
 
+  const [comment, setComment] = useState('');
+
   const handleClick = (selectedRental) => {
     setSelectedRental(selectedRental);
+  };
+
+  const commentInput = {
+    comment,
+    token,
+    listing_id: selectedRental._id,
+  };
+
+  const handleCommentSubmit = (commentInput) => {
+    setComment('');
+    addComment(commentInput);
   };
 
   return (
     <Fragment>
       {dashboardMap[step] === 'fullProfile' && (
-        <div className='search-item-profile-container'>
+        <div className='myrentals-profile-container'>
+          <div className='myrentals-comment-container my-5'>
+            <div className='myrentals-comment-inner-container'>
+              <div class='post-form'>
+                <div class='bg-primary'>
+                  <h3 className='myrentals-comment-title'>
+                    How was your experience?
+                  </h3>
+                </div>
+                <form
+                  class='form my-1'
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    handleCommentSubmit(commentInput);
+                  }}
+                >
+                  <textarea
+                    name='text'
+                    cols='30'
+                    rows='5'
+                    className='myrentals-textarea'
+                    placeholder='Leave a comment'
+                    value={comment}
+                    onChange={(e) => setComment(e.target.value)}
+                    required
+                  ></textarea>
+                  <input
+                    type='submit'
+                    class='btn btn-dark my-1'
+                    value='Submit'
+                  />
+                </form>
+              </div>
+            </div>
+          </div>
           <div className='search-item-profile-main-image-container '>
             {selectedRental && (
               <img
@@ -115,6 +163,8 @@ SearchItemProfile.propTypes = {
   selectResult: PropTypes.func.isRequired,
   token: PropTypes.string.isRequired,
   step: PropTypes.number.isRequired,
+  addComment: PropTypes.func.isRequired,
+  token: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -128,4 +178,5 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   findNearListings,
   selectResult,
+  addComment,
 })(SearchItemProfile);
