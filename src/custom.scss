@@ -775,7 +775,7 @@ $body-bg: white;
 
 .myrentals-comment-inner-container {
   // border: 2px solid #0275d8;
-  width: 80%;
+  width: 90%;
   // display: flex;
   // justify-content: center;
 }
@@ -787,6 +787,48 @@ $body-bg: white;
 .myrentals-comment-title {
   text-align: center;
   color: white;
+}
+
+.comment-container {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  grid-gap: 2rem;
+  align-items: center;
+}
+
+.comment-date {
+  font-style: italic;
+}
+
+.comment-name {
+  font-weight: 400;
+  font-size: 20px;
+}
+
+.rating-star-container {
+  height: 100px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+
+.rating-star {
+  font-size: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.star-checked {
+  color: orange;
+}
+
+.submitted-comments-a {
+  display: inline;
+}
+
+.submitted-comments-b {
+  font-style: italic;
+  display: inline;
 }
 
 // _________________________________________________Media Queries_________________________________________________________________________

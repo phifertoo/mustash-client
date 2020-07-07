@@ -127,9 +127,9 @@ const SearchItemProfile = ({
 };
 
 SearchItemProfile.propTypes = {
-  searchResults: PropTypes.array.isRequired,
+  // searchResults: PropTypes.array.isRequired,
   findNearListings: PropTypes.func.isRequired,
-  nearbyListings: PropTypes.object.isRequired,
+  // nearbyListings: PropTypes.object.isRequired,
   selectedResult: PropTypes.object.isRequired,
   selectResult: PropTypes.func.isRequired,
   reserveSpace: PropTypes.func.isRequired,

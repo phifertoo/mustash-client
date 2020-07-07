@@ -13,6 +13,12 @@ export default function (state = initialState, action) {
     case 'SETSELECTEDRENTAL_SUCCESS':
       return { ...state, selectedRental: payload };
     case 'ADDCOMMENT_SUCCESS':
+    case 'ADDRATING_SUCCESS':
+      return {
+        ...state,
+        selectedRental: payload.result,
+        myRentals: payload.myRentals,
+      };
     default:
       return state;
   }
@@ -56,11 +62,38 @@ export const addComment = (input) => async (dispatch) => {
     comment: input.comment,
   };
   try {
-    await axios.post(`/api/comments/${input.listing_id}`, body, config);
-    dispatch({ type: 'ADDCOMMENT_SUCCESS' });
+    const res = await axios.post(
+      `/api/comments/${input.listing_id}`,
+      body,
+      config
+    );
+    dispatch({ type: 'ADDCOMMENT_SUCCESS', payload: res.data });
   } catch (err) {
     console.log(err);
 
     dispatch({ type: 'ADDCOMMENT_FAIL' });
+  }
+};
+
+export const addRating = (input) => async (dispatch) => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      'x-auth-token': input.token,
+    },
+  };
+  const body = {
+    rating: input.rating,
+  };
+  try {
+    const res = await axios.post(
+      `/api/ratings/${input.listing_id}`,
+      body,
+      config
+    );
+    dispatch({ type: 'ADDRATING_SUCCESS', payload: res.data });
+  } catch (err) {
+    console.log(err);
+    dispatch({ type: 'ADDRATING_FAIL' });
   }
 };
