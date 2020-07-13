@@ -8,11 +8,24 @@ import Navbar from '../layout/Navbar';
 export const Register = ({ setAlert, register }) => {
   const [formData, setFormData] = useState({
     name: '',
+    firstName: '',
+    lastName: '',
+    city: '',
+    phone: '',
     email: '',
     password: '',
     password2: '',
   });
-  const { name, email, password, password2 } = formData;
+  const {
+    name,
+    firstName,
+    lastName,
+    city,
+    phone,
+    email,
+    password,
+    password2,
+  } = formData;
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
   const onSubmit = async (e) => {
@@ -23,7 +36,7 @@ export const Register = ({ setAlert, register }) => {
         the payload then dispatched to the store/state */
       setAlert('Passwords do not match', 'danger');
     } else {
-      register({ name, email, password });
+      register({ formData });
     }
   };
 
@@ -41,10 +54,40 @@ export const Register = ({ setAlert, register }) => {
               <input
                 className='form-control'
                 type='text'
-                placeholder='Name'
-                value={name}
+                placeholder='First Name'
+                value={firstName}
                 onChange={(e) => onChange(e)}
-                name='name'
+                name='firstName'
+              />
+            </div>
+            <div className='form-group mb-1'>
+              <input
+                className='form-control'
+                type='text'
+                placeholder='Last Name'
+                value={lastName}
+                onChange={(e) => onChange(e)}
+                name='lastName'
+              />
+            </div>
+            <div className='form-group mb-1'>
+              <input
+                className='form-control'
+                type='text'
+                placeholder='City'
+                value={city}
+                onChange={(e) => onChange(e)}
+                name='city'
+              />
+            </div>
+            <div className='form-group mb-1'>
+              <input
+                className='form-control'
+                type='text'
+                placeholder='Phone Number'
+                value={phone}
+                onChange={(e) => onChange(e)}
+                name='phone'
               />
             </div>
             <div className='form-group  mb-1'>

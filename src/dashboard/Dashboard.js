@@ -8,6 +8,7 @@ import UpdateImages from './UpdateImages';
 import { setDashboardStep } from '../ducks/updateListings';
 import MyRentals from './MyRentals';
 import FullProfile from './FullProfile';
+import UserProfile from './UserProfile';
 
 export const Dashboard = ({
   selectedListing,
@@ -40,6 +41,7 @@ export const Dashboard = ({
           </div>
           {isAuthenticated && <MyListings />}
           {isAuthenticated && <MyRentals />}
+          {isAuthenticated && <UserProfile />}
           {Object.keys(selectedRental).length > 0 && <FullProfile />}
           {Object.keys(selectedListing).length > 0 && <UpdateListing />}
           {Object.keys(selectedListing).length > 0 && <UpdateImages />}

@@ -6,9 +6,14 @@ const initialState = {
   // isAuthenticated: false,
   // user: null,
   token:
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXIiOiI1ZWJlNGE1ZjQ0YjBlYzJjZTg0Mjk0YzIifSwiaWF0IjoxNTk0MTAzNzc3LCJleHAiOjE1OTQyMDM3Nzd9.47_iZv0IGbZnHawf3lnCeI7C7D5NZyAwFwppPdxEfgY',
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXIiOiI1ZWJlNGE1ZjQ0YjBlYzJjZTg0Mjk0YzIifSwiaWF0IjoxNTk0NDI3ODEzLCJleHAiOjE1OTQ1Mjc4MTN9.50_snXdVFOnB5ZXpFQzE2F1O0n1vA4JD22uD2NFsPoI',
   isAuthenticated: true,
   user: '5ebe4a5f44b0ec2ce84294c2',
+  email: '',
+  pictureURL: '',
+  firstName: '',
+  lastName: '',
+  city: '',
 };
 
 export default function (state = initialState, action) {
@@ -41,13 +46,22 @@ export const setAlert = (msg, alertType, timeout = 5000) => (dispatch) => {
 };
 
 //Register user
-export const register = ({ name, email, password }) => async (dispatch) => {
+export const register = ({ formData }) => async (dispatch) => {
+  const { firstName, lastName, email, password, city, phone } = formData;
+
   const config = {
     headers: {
       'Content-Type': 'application/json',
     },
   };
-  const body = JSON.stringify({ name, email, password });
+  const body = JSON.stringify({
+    firstName,
+    lastName,
+    email,
+    password,
+    city,
+    phone,
+  });
   try {
     /* if the loadUser function is successful, perform a post request to the 
       /api/users path sending the name, email, and password in the body and

@@ -3,7 +3,7 @@ import axios from 'axios';
 const initialState = {
   sellerListings: [],
   selectedListing: {},
-  step: 0,
+  step: 3,
 };
 
 export default function (state = initialState, action) {
