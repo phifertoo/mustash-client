@@ -10,7 +10,14 @@ import {
   deleteConversation,
 } from '../ducks/conversations';
 
-const Conversations = ({ step, getConversations, token }) => {
+const Conversations = ({
+  step,
+  getConversations,
+  startConversation,
+  replyConversation,
+  deleteConversation,
+  token,
+}) => {
   useEffect(() => {
     getConversations(token);
   });
@@ -18,6 +25,21 @@ const Conversations = ({ step, getConversations, token }) => {
   const handleStartConversation = (recipient_id, token, newMessage) => {
     const input = { recipient_id, token, newMessage };
     startConversation(input);
+  };
+
+  const handleReplyConversation = (
+    recipient_id,
+    conversation_id,
+    token,
+    newMessage
+  ) => {
+    const input = { recipient_id, token, newMessage, conversation_id };
+    replyConversation(input);
+  };
+
+  const handleDeleteConversation = (conversation_id, token) => {
+    const input = { token, conversation_id };
+    deleteConversation(input);
   };
 
   return (
@@ -41,6 +63,27 @@ const Conversations = ({ step, getConversations, token }) => {
               }
             >
               Start Conversation
+            </button>
+            <button
+              className='btn btn-primary'
+              onClick={() =>
+                handleReplyConversation(
+                  '5f0a2a0d2f27286538d85df2',
+                  '5ytq10yxlkk1xmkfr3eace',
+                  token,
+                  'test6'
+                )
+              }
+            >
+              Reply Conversation
+            </button>
+            <button
+              className='btn btn-primary'
+              onClick={() =>
+                handleDeleteConversation('fbio3wzpngbgcbfidwtp2i', token)
+              }
+            >
+              Delete Conversation
             </button>
           </div>
         </div>

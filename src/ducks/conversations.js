@@ -9,7 +9,7 @@ export default function (state = initialState, action) {
   switch (type) {
     case 'STARTCONVERSATION_SUCCESS':
     case 'GETCONVERSATIONS_SUCCESS':
-    case 'REPLAYCONVERSATION_SUCCESS':
+    case 'REPLYCONVERSATION_SUCCESS':
     case 'DELETECONVERSATION_SUCCESS':
       return { ...state, conversations: payload };
     default:
@@ -72,7 +72,7 @@ export const replyConversation = (input) => async (dispatch) => {
       body,
       config
     );
-    dispatch({ type: 'REPLAYCONVERSATION_SUCCESS', payload: res.data.result1 });
+    dispatch({ type: 'REPLYCONVERSATION_SUCCESS', payload: res.data.result1 });
   } catch (err) {
     console.log(err);
   }
@@ -86,11 +86,15 @@ export const deleteConversation = (input) => async (dispatch) => {
     },
   };
   try {
-    const res = await axios.post(
+    const res = await axios.delete(
       `/api/messages/${input.conversation_id}`,
       config
     );
-    dispatch({ type: 'DELETECONVERSATION_SUCCESS', payload: res.data });
+    console.log(res.data);
+    dispatch({
+      type: 'DELETECONVERSATION_SUCCESS',
+      payload: res.data.conversations,
+    });
   } catch (err) {
     console.log(err);
   }
