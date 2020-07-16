@@ -5,6 +5,7 @@ import space from './list';
 import searchListings from './searchListings';
 import updateListings from './updateListings';
 import rentals from './rentals';
+import conversations from './conversations';
 
 export default combineReducers({
   auth,
@@ -13,4 +14,5 @@ export default combineReducers({
   searchListings,
   updateListings,
   rentals,
+  conversations,
 });

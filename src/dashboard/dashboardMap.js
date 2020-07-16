@@ -1,7 +1,7 @@
 export const dashboardMap = {
   0: 'mylistings',
   1: 'myrentals',
-  2: 'inbox',
+  2: 'conversations',
   3: 'userProfile',
   4: 'updateListing',
   5: 'updateProfile',

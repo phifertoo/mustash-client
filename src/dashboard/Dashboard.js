@@ -9,6 +9,7 @@ import { setDashboardStep } from '../ducks/updateListings';
 import MyRentals from './MyRentals';
 import FullProfile from './FullProfile';
 import UserProfile from './UserProfile';
+import Conversations from './Conversations';
 
 export const Dashboard = ({
   selectedListing,
@@ -16,10 +17,9 @@ export const Dashboard = ({
   setDashboardStep,
   selectedRental,
 }) => {
-  const categories = ['My Listings', 'My Rentals', 'Inbox', 'Profile'];
+  const categories = ['My Listings', 'My Rentals', 'Conversations', 'Profile'];
 
   const handleClick = (step) => {
-    setDashboardStep(step);
     setDashboardStep(step);
   };
 
@@ -42,6 +42,7 @@ export const Dashboard = ({
           {isAuthenticated && <MyListings />}
           {isAuthenticated && <MyRentals />}
           {isAuthenticated && <UserProfile />}
+          {isAuthenticated && <Conversations />}
           {Object.keys(selectedRental).length > 0 && <FullProfile />}
           {Object.keys(selectedListing).length > 0 && <UpdateListing />}
           {Object.keys(selectedListing).length > 0 && <UpdateImages />}
