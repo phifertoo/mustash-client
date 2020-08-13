@@ -6,7 +6,7 @@ const initialState = {
   // isAuthenticated: false,
   // user: null,
   token:
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXIiOiI1ZjBhMmEwZDJmMjcyODY1MzhkODVkZjIifSwiaWF0IjoxNTk0OTMxMTY4LCJleHAiOjE1OTUwMzExNjh9.wFP_3r9gfo7HqviuR850si1oo96Cnke7b9FF1URhZKE',
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXIiOiI1ZWJlNGE1ZjQ0YjBlYzJjZTg0Mjk0YzIifSwiaWF0IjoxNTk3MTg0NDI5LCJleHAiOjE1OTcyODQ0Mjl9.MAypSV_P6npv03rUjcuLhymCIc4nE6gh0PyJFrHtLEg',
   isAuthenticated: true,
   user: '5ebe4a5f44b0ec2ce84294c2',
   email: '',

@@ -19,22 +19,6 @@ export const SearchResults = ({
     searchListings(searchAddress, searchRadius);
   }, [searchListings, searchRadius, searchAddress]);
 
-  let searchArray = searchResults.reduce((acc, nextVal) => {
-    acc.push({
-      lat: nextVal.location.coordinates[1],
-      lng: nextVal.location.coordinates[0],
-    });
-    return acc;
-  }, []);
-  if (Object.keys(selectedResult).length > 0) {
-    searchArray = [
-      {
-        lat: selectedResult.location.coordinates[1],
-        lng: selectedResult.location.coordinates[0],
-      },
-    ];
-  }
-
   const GoogleMapExample = withGoogleMap(() => {
     return (
       <GoogleMap defaultCenter={center} defaultZoom={13}>
@@ -42,9 +26,18 @@ export const SearchResults = ({
           onClick={() => alert("bottom")}
           position={{ lat: 40.756795, lng: -52 }}
         /> */}
-        {searchArray.map((element, index) => (
-          <Marker key={index} position={element} />
-        ))}
+        {searchResults.map(
+          (element, index) =>
+            element.renter === '' && (
+              <Marker
+                key={index}
+                position={{
+                  lat: element.location.coordinates[1],
+                  lng: element.location.coordinates[0],
+                }}
+              />
+            )
+        )}
       </GoogleMap>
     );
   });
@@ -52,6 +45,7 @@ export const SearchResults = ({
   const showSearchResults = () => {
     if (
       searchResults.length > 0 &&
+      //looking for search results with no renter
       !searchResults.every((element) => element.renter)
     ) {
       console.log('fail');

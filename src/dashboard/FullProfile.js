@@ -54,6 +54,7 @@ const SearchItemProfile = ({
     setData({
       ...data,
       comment: '',
+      editComments: false,
     });
   };
 
@@ -64,6 +65,7 @@ const SearchItemProfile = ({
     setData({
       ...data,
       rating: 0,
+      editRating: false,
     });
   };
 

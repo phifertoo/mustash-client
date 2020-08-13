@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const initialState = {
-  currentStep: 9,
+  currentStep: 0,
   address: {
     street: '555 s flower',
     city: 'los angeles',

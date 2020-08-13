@@ -25,8 +25,9 @@ export const Landing = ({ saveSearchQuery, clearSelectedResult }) => {
     setData({ ...data, [e.target.name]: e.target.value });
   const handleSubmit = (e) => {
     e.preventDefault();
+    // searchListings(data.address, data.radius);
+
     saveSearchQuery(data);
-    // searchListings();
     // geocode({ city, state });
     setData({
       ...data,
